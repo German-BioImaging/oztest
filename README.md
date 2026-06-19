@@ -13,6 +13,36 @@ whose arguments and intended function are specified in this repository.
 The testing tools then invoke the dingus with one test case at a time,
 collect the output, and tabulate the implementation's conformance to expectations.
 
+## Test case layout
+
+Test cases are found in the [`cases/`](./cases/) directory.
+The path to each test from there is `{kind}/v{version}/{profile}/{validity}/{name}{extension}`.
+
+- Each kind directory has its own README.md, as they are structured differently and likely require different dingus CLIs
+- The version corresponds to an OME-Zarr version
+- The profile corresponds to whether support for particular tests are required in the core spec, optional, or some extension
+- The validity of a test case allows for "expected failure" cases - e.g. where validators _should_ refuse to parse some particular case
+- The name of a test is local to the kind/ version/ profile/ validity
+- The extension is used to identify whether the test is a JSON file (`.json`), an OME-Zarr hierarchy (`.ome.zarr`), or something else
+
+Tests are globally identified by a slug made up of the above path, minus the extension, e.g. `parse_attributes/v0.5/core/valid/easy_test`.
+
+Implementors may supply their own additional test cases.
+In order to use them with the `ozconf` tool, they MUST be in a comparable directory hierarchy.
+Implementation-specific behaviour SHOULD be tested using a `profile` specific to that implementation.
+
+## Using the conformance tester
+
+Install the `ozconf` python package using uv, pipx, or pip, and invoke it from your terminal with `ozconf`.
+Alternatively, run it within an ephemeral environment with `uvx ozconf` (requires uv).
+
+The tool allows you to
+
+- `export` the built-in test cases from the package distribution
+- `query` which of the above attributes are available for a given set of test filters (e.g. which OME-Zarr versions have cases for a particular test kind)
+- `find` which tests match a given set of filters
+- `test` with the built-in and/or your own cases, using your dingus CLI
+
 ## Data validation conformance levels
 
 Conformance for validating OME-Zarr data and metadata can be tested at several levels.
@@ -31,18 +61,18 @@ Conformance for validating OME-Zarr data and metadata can be tested at several l
 
 4. Validating a zarr hierarchy with data
 
-## Types of test
+## Test kinds
 
 ### parse_attributes
 
-These cases test levels 1 and 2 validation;
+These cases exercise levels 1 and 2 validation;
 whether a single Zarr attributes object containing OME-Zarr can be represented and validated.
 
 See [cases/parse_attributes/README.md](./cases/parse_attributes/README.md) for more details.
 
 ### validate_zarr
 
-These cases test levels 1-4 validation;
+These cases exercise levels 1-4 validation;
 whether an entire Zarr hierarchy containing OME-Zarr data can be represented and validated.
 
 See [cases/validate_zarr/README.md](./cases/validate_zarr/README.md) for more details.
@@ -56,7 +86,7 @@ See [cases/transform_coordinates/README.md](./cases/transform_coordinates/README
 ## Versioning
 
 This repository uses [calendar versioning](https://calver.org/)
-under the [python version scheme](https://packaging.python.org/en/latest/specifications/version-specifiers/#version-scheme)
+under the [python package version scheme](https://packaging.python.org/en/latest/specifications/version-specifiers/#version-scheme)
 originally proposed in [PEP 440](https://peps.python.org/pep-0440/).
 
 See the [changelog](./CHANGELOG.md) for details on support for different OME-Zarr versions.

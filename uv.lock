@@ -243,7 +243,7 @@ name = "ozconf"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [
-    { name = "parver" },
+    { name = "packaging" },
     { name = "rich" },
     { name = "tomli" },
     { name = "typer" },
@@ -258,7 +258,7 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "parver", specifier = ">=1.0" },
+    { name = "packaging", specifier = ">=26.2" },
     { name = "rich", specifier = ">=15.0.0" },
     { name = "tomli", specifier = ">=2.4.1" },
     { name = "typer", specifier = ">=0.26.7" },
@@ -272,12 +272,12 @@ dev = [
 ]
 
 [[package]]
-name = "parver"
-version = "1.0"
+name = "packaging"
+version = "26.2"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/24/24/6bf5a4462c04edeaed40c74b85bd4f481f634415fe8cdfece1ddabc042f1/parver-1.0.tar.gz", hash = "sha256:e59ad804a0d6ddd532033cb67c5bc26fdbfbfe3d06fe76f2bee48727e2fa5229", size = 104491, upload-time = "2026-05-19T22:30:34.93Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/d7/f1/e7a6dd94a8d4a5626c03e4e99c87f241ba9e350cd9e6d75123f992427270/packaging-26.2.tar.gz", hash = "sha256:ff452ff5a3e828ce110190feff1178bb1f2ea2281fa2075aadb987c2fb221661", size = 228134, upload-time = "2026-04-24T20:15:23.917Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/b9/e4/dcfdaf1fda1883e3fb34a410158cc61e68644c4024c4bdef81e1532cde06/parver-1.0-py3-none-any.whl", hash = "sha256:ba201193c651d5d4de3761ee2709a31fb451280271325607ce1632653617a43e", size = 20803, upload-time = "2026-05-19T22:30:33.343Z" },
+    { url = "https://files.pythonhosted.org/packages/df/b2/87e62e8c3e2f4b32e5fe99e0b86d576da1312593b39f47d8ceef365e95ed/packaging-26.2-py3-none-any.whl", hash = "sha256:5fc45236b9446107ff2415ce77c807cee2862cb6fac22b8a73826d0693b0980e", size = 100195, upload-time = "2026-04-24T20:15:22.081Z" },
 ]
 
 [[package]]
