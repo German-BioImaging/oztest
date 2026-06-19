@@ -1,0 +1,61 @@
+name: CI
+on:
+  - push
+  - pull_request
+
+jobs:
+  format:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+      - run: uv sync --all-extras
+      - run: uv run ruff format --check
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+      - uses: extractions/setup-just@v3
+      - run: just lint
+
+  #   test:
+  #     runs-on: ubuntu-latest
+  #     strategy:
+  #       fail-fast: false
+  #       matrix:
+  #         python-version:
+  #           - "3.10"
+  #           - "3.11"
+  #           - "3.12"
+  #           - "3.13"
+  #           - "3.14"
+  #     steps:
+  #       - uses: actions/checkout@v6
+  #       - uses: astral-sh/setup-uv@v6
+  #         with:
+  #           enable-cache: false
+  #           python-version: ${{ matrix.python-version }}
+  #       - uses: extractions/setup-just@v3
+  #       - run: just test
+
+  publish:
+    runs-on: ubuntu-latest
+    if: startsWith(github.event.ref, 'refs/tags/v')
+    needs: [format, lint]
+    environment:
+      name: pypi
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v6
+      - uses: astral-sh/setup-uv@v6
+      - run: uv python install 3.12
+      - run: uv build
+      - run: uv publish
