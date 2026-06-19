@@ -62,7 +62,7 @@ async def run_parse_attributes(dingus: list[str], cases: CaseFilter):
             status = "error"
 
         if res.output:
-            validity, msg = parse_output(res.output)
+            validity, msg = parse_output(res.output)  # type: ignore
             if validity == res.case.validity:
                 status = status or "pass"
             else:

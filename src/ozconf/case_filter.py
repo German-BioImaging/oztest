@@ -18,8 +18,8 @@ logger = logging.getLogger(__name__)
 def case_kinds(path: Path | None = None) -> Iterable[tuple[str, Any]]:
     """Iterate over case kinds and the associated Traversable."""
     if path is None:
-        path = files("ozconf.cases")
-    for item in path.iterdir():
+        path = files("ozconf.cases")  # type: ignore
+    for item in path.iterdir():  # type: ignore
         if item.name.startswith("__") or item.name.startswith(".") or not item.is_dir():
             continue
         yield (item.name, item)

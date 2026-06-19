@@ -87,7 +87,7 @@ def query(
         make_validity_filter(include_validity, exclude_validity),
         make_str_filter(include_name, exclude_name),
     )
-    elems = set()
+    elems: set[str | OzVersion] = set()
     for tcase, _ in filt:
         match item:
             case "kind":
