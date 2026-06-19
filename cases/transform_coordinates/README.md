@@ -5,7 +5,7 @@ They do NOT test implementations' capability to transform images on the basis of
 
 ## Test case layout
 
-Within each version subdirectory, each directory is a test case as an OME-Zarr hierarchy with a Scene in the root node.
+Each test case is an OME-Zarr hierarchy with a Scene in the root node.
 This Scene contains a graph of coordinate systems joined by coordinate transformations.
 
 At the root of each OME-Zarr hierarchy is a `conformance.toml` file, which lays out:
