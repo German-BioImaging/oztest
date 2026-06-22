@@ -48,32 +48,34 @@ def case_kind_version_profile_validities(
             yield (d.name, d)
 
 
-def _iter_files_recursive(trav, prefix: str = "") -> Iterable[tuple[str, Any]]:
-    """Recursively walk a Traversable, yielding (relative_path, Traversable) for every file found.
+def _iter_case_files_recursive(trav, prefix: str = "") -> Iterable[tuple[str, Any]]:
+    """Recursively walk a Traversable beneath `validity`, yielding (name, Traversable)
+    for every test case found.
 
-    Test cases may be nested arbitrarily deeply under `validity`
-    (e.g. `invalid/image/foo.json`) purely for organisational purposes;
-    that nesting is not itself a filterable attribute.
+    A path component with a `.` in its name is a leaf test case (its extension says
+    whether it's a JSON file or an OME-Zarr hierarchy directory like `*.ome.zarr/`),
+    regardless of whether it's itself a file or a directory. A directory with no `.`
+    in its name (e.g. `image/`, `well/`) is purely organisational and is recursed
+    into, not itself selectable as a filter attribute.
     """
     for item in trav.iterdir():
         if item.name.startswith("__") or item.name.startswith("."):
             continue
-        rel = f"{prefix}/{item.name}" if prefix else item.name
-        if item.is_dir():
-            yield from _iter_files_recursive(item, rel)
+        if item.is_dir() and "." not in item.name:
+            new_prefix = f"{prefix}/{item.name}" if prefix else item.name
+            yield from _iter_case_files_recursive(item, new_prefix)
         else:
-            yield (rel, item)
+            name = item.name.split(".")[0]
+            yield (f"{prefix}/{name}" if prefix else name, item)
 
 
 def case_kind_version_validity_names(
     case_kind_version_validity_trav,
 ) -> Iterable[tuple[str, Any]]:
     """Given a case kind version validity Traversable, recursively iterate over all
-    contained test case files (at any depth) and their associated Traversable.
-    The name yielded is the path relative to `validity`, minus extension."""
-    for rel, item in _iter_files_recursive(case_kind_version_validity_trav):
-        name, _, ext = rel.rpartition(".")
-        yield (name if ext else rel, item)
+    contained test cases (at any depth of organisational subdirectories) and their
+    associated Traversable."""
+    yield from _iter_case_files_recursive(case_kind_version_validity_trav)
 
 
 class OzVersion(Version):
