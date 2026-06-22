@@ -25,7 +25,7 @@ def case_kinds(path: Path | None = None) -> Iterable[tuple[str, Any]]:
         yield (item.name, item)
 
 
-def case_kind_versions(case_kind_trav) -> Iterable[tuple[Version, Any]]:
+def case_kind_versions(case_kind_trav) -> Iterable[tuple["OzVersion", Any]]:
     """Given a case kind Traversable, iterate over the contained versions and their associated Traversable."""
     for d in case_kind_trav.iterdir():
         if d.name.startswith("v") and d.is_dir():
@@ -48,13 +48,32 @@ def case_kind_version_profile_validities(
             yield (d.name, d)
 
 
+def _iter_files_recursive(trav, prefix: str = "") -> Iterable[tuple[str, Any]]:
+    """Recursively walk a Traversable, yielding (relative_path, Traversable) for every file found.
+
+    Test cases may be nested arbitrarily deeply under `validity`
+    (e.g. `invalid/image/foo.json`) purely for organisational purposes;
+    that nesting is not itself a filterable attribute.
+    """
+    for item in trav.iterdir():
+        if item.name.startswith("__") or item.name.startswith("."):
+            continue
+        rel = f"{prefix}/{item.name}" if prefix else item.name
+        if item.is_dir():
+            yield from _iter_files_recursive(item, rel)
+        else:
+            yield (rel, item)
+
+
 def case_kind_version_validity_names(
     case_kind_version_validity_trav,
 ) -> Iterable[tuple[str, Any]]:
-    """Given a case kind version validity Traversable, iterate over the contained names and their associated Traversable."""
-    for d in case_kind_version_validity_trav.iterdir():
-        n = d.name.split(".")[0]
-        yield (n, d)
+    """Given a case kind version validity Traversable, recursively iterate over all
+    contained test case files (at any depth) and their associated Traversable.
+    The name yielded is the path relative to `validity`, minus extension."""
+    for rel, item in _iter_files_recursive(case_kind_version_validity_trav):
+        name, _, ext = rel.rpartition(".")
+        yield (name if ext else rel, item)
 
 
 class OzVersion(Version):
@@ -72,14 +91,26 @@ class Case:
     Use `Case.as_path` as a context manager to get a path to the real location of the test case.
     """
 
-    def __init__(self, traversable) -> None:
-        """Takes a Traversable as from `importlib.resources.files`."""
-        self.name = traversable.name.split(".")[0]
-        parents = iter(traversable.parents)
-        self.validity: str = next(parents).name
-        self.profile: str = next(parents).name
-        self.version: OzVersion = OzVersion(next(parents).name)
-        self.kind: str = next(parents).name
+    def __init__(
+        self,
+        traversable,
+        kind: str,
+        version: "OzVersion",
+        profile: str,
+        validity: str,
+        name: str,
+    ) -> None:
+        """Takes a Traversable as from `importlib.resources.files`, plus the explicit
+        kind/version/profile/validity/name context.
+
+        This context cannot be reliably inferred from `traversable`'s path alone,
+        since cases may be nested arbitrarily deeply under `validity`.
+        """
+        self.kind = kind
+        self.version = version
+        self.profile = profile
+        self.validity = validity
+        self.name = name
 
         self.traversable = traversable
 
@@ -112,9 +143,7 @@ class Case:
 
     def slug(self) -> str:
         """Get the full identifier of the test case."""
-        parts = list(self.traversable.parts[-5:-1])
-        parts.append(self.name)
-        return "/".join(parts)
+        return "/".join([self.kind, self.version.raw, self.profile, self.validity, self.name])
 
     def __str__(self) -> str:
         return f"{type(self).__name__}({self.slug()})"
@@ -259,9 +288,11 @@ class CaseFilter(Iterable):
                 self.logger.debug("Filtered out kind '%s'", kind)
                 if not self.verbose:
                     continue
-            yield from self._iter_versions(kpath, kind_run)
+            yield from self._iter_versions(kpath, kind_run, kind)
 
-    def _iter_versions(self, kind_trav, run: bool) -> Iterator[tuple[Case, bool]]:
+    def _iter_versions(
+        self, kind_trav, run: bool, kind: str
+    ) -> Iterator[tuple[Case, bool]]:
         for version, verpath in case_kind_versions(kind_trav):
             ver_run = run
             if (
@@ -273,9 +304,11 @@ class CaseFilter(Iterable):
                 ver_run = False
                 if not self.verbose:
                     continue
-            yield from self._iter_profiles(verpath, ver_run)
+            yield from self._iter_profiles(verpath, ver_run, kind, version)
 
-    def _iter_profiles(self, version_trav, run: bool) -> Iterator[tuple[Case, bool]]:
+    def _iter_profiles(
+        self, version_trav, run: bool, kind: str, version: OzVersion
+    ) -> Iterator[tuple[Case, bool]]:
         for profile, propath in case_kind_version_profiles(version_trav):
             pro_run = run
             if (
@@ -287,9 +320,11 @@ class CaseFilter(Iterable):
                 pro_run = False
                 if not self.verbose:
                     continue
-            yield from self._iter_validities(propath, pro_run)
+            yield from self._iter_validities(propath, pro_run, kind, version, profile)
 
-    def _iter_validities(self, profile_trav, run: bool) -> Iterator[tuple[Case, bool]]:
+    def _iter_validities(
+        self, profile_trav, run: bool, kind: str, version: OzVersion, profile: str
+    ) -> Iterator[tuple[Case, bool]]:
         for validity, valpath in case_kind_version_profile_validities(profile_trav):
             val_run = run
             if (
@@ -301,9 +336,17 @@ class CaseFilter(Iterable):
                 val_run = False
                 if not self.verbose:
                     continue
-            yield from self._iter_names(valpath, run)
+            yield from self._iter_names(valpath, val_run, kind, version, profile, validity)
 
-    def _iter_names(self, validity_trav, run: bool) -> Iterator[tuple[Case, bool]]:
+    def _iter_names(
+        self,
+        validity_trav,
+        run: bool,
+        kind: str,
+        version: OzVersion,
+        profile: str,
+        validity: str,
+    ) -> Iterator[tuple[Case, bool]]:
         for name, npath in case_kind_version_validity_names(validity_trav):
             this_run = run
             if run and self.name_filter is not None and not self.name_filter(name):
@@ -312,10 +355,10 @@ class CaseFilter(Iterable):
                 if not self.verbose:
                     continue
 
-            case = Case(npath)
+            case = Case(npath, kind, version, profile, validity, name)
             if this_run:
                 self.logger.debug("Selected test case '%s'", case.slug())
-            yield Case(npath), this_run
+            yield case, this_run
 
     def __iter__(self) -> Iterator[tuple[Case, bool]]:
         yield from self._iter_case_roots()
