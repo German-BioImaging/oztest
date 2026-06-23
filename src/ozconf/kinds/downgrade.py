@@ -69,7 +69,9 @@ def _downgrade_dataset_transforms(transforms: list) -> list:
     out = []
     for t in transforms:
         if t.get("type") in UNSUPPORTED_TRANSFORM_TYPES:
-            raise NotRepresentable(f"unsupported dataset transform type {t.get('type')!r}")
+            raise NotRepresentable(
+                f"unsupported dataset transform type {t.get('type')!r}"
+            )
         out.append(_strip_io(t))
     return out
 
@@ -99,7 +101,9 @@ def _extract_axes(multiscale: dict) -> list | None:
     axes = cs.get("axes")
     if axes is None:
         return None
-    return [{k: v for k, v in ax.items() if k in ("name", "type", "unit")} for ax in axes]
+    return [
+        {k: v for k, v in ax.items() if k in ("name", "type", "unit")} for ax in axes
+    ]
 
 
 def _extract_top_transforms(multiscale: dict) -> list | None:
@@ -164,7 +168,11 @@ def downgrade_passthrough(ome: dict) -> dict:
 
 def downgrade_well(ome: dict) -> dict:
     images = ome.get("well", {}).get("images", [])
-    bad = [img["path"] for img in images if "path" in img and not ALPHANUMERIC_RE.match(img["path"])]
+    bad = [
+        img["path"]
+        for img in images
+        if "path" in img and not ALPHANUMERIC_RE.match(img["path"])
+    ]
     if bad:
         raise NotRepresentable(
             f"well image path(s) {bad} use characters v0.5's stricter pattern disallows"
@@ -231,4 +239,6 @@ def run_downgrade(cases: CaseFilter, output_root: Path) -> None:
         if not should_run or case.version.raw != "v0.6":
             continue
         status, msg = downgrade_case(case, output_root)
-        print(case.slug(), f"[{colour[status]}]{status}[/{colour[status]}]", msg, sep="\t")
+        print(
+            case.slug(), f"[{colour[status]}]{status}[/{colour[status]}]", msg, sep="\t"
+        )

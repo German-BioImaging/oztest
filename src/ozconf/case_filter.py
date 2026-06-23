@@ -145,7 +145,9 @@ class Case:
 
     def slug(self) -> str:
         """Get the full identifier of the test case."""
-        return "/".join([self.kind, self.version.raw, self.profile, self.validity, self.name])
+        return "/".join(
+            [self.kind, self.version.raw, self.profile, self.validity, self.name]
+        )
 
     def __str__(self) -> str:
         return f"{type(self).__name__}({self.slug()})"
@@ -338,7 +340,9 @@ class CaseFilter(Iterable):
                 val_run = False
                 if not self.verbose:
                     continue
-            yield from self._iter_names(valpath, val_run, kind, version, profile, validity)
+            yield from self._iter_names(
+                valpath, val_run, kind, version, profile, validity
+            )
 
     def _iter_names(
         self,
