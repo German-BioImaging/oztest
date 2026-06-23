@@ -1,0 +1,33 @@
+{
+  "ome": {
+    "version": "0.5",
+    "multiscales": [
+      {
+        "axes": [
+          {
+            "name": "t",
+            "type": "time"
+          },
+          {
+            "name": "c",
+            "type": "channel"
+          }
+        ],
+        "datasets": [
+          {
+            "path": "0",
+            "coordinateTransformations": [
+              {
+                "scale": [
+                  1,
+                  1
+                ],
+                "type": "scale"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

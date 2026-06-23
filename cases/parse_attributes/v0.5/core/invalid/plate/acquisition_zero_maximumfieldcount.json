@@ -1,0 +1,30 @@
+{
+  "ome": {
+    "version": "0.5",
+    "plate": {
+      "acquisitions": [
+        {
+          "id": 0,
+          "maximumfieldcount": 0
+        }
+      ],
+      "columns": [
+        {
+          "name": "1"
+        }
+      ],
+      "rows": [
+        {
+          "name": "A"
+        }
+      ],
+      "wells": [
+        {
+          "path": "A/1",
+          "rowIndex": 0,
+          "columnIndex": 0
+        }
+      ]
+    }
+  }
+}

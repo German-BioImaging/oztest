@@ -1,0 +1,23 @@
+{
+  "ome": {
+    "version": "0.5",
+    "multiscales": [
+      {
+        "datasets": [
+          {
+            "path": "0",
+            "coordinateTransformations": [
+              {
+                "scale": [
+                  1,
+                  1
+                ],
+                "type": "scale"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "ome": {
+    "version": "0.5",
+    "multiscales": [
+      {
+        "axes": [
+          {
+            "type": "space",
+            "unit": "micron"
+          },
+          {
+            "type": "space",
+            "unit": "micron"
+          }
+        ],
+        "datasets": [
+          {
+            "path": "0",
+            "coordinateTransformations": [
+              {
+                "scale": [
+                  0.13,
+                  0.13
+                ],
+                "type": "scale"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

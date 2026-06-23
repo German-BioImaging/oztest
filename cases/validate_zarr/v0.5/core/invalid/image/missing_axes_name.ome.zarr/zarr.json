@@ -1,0 +1,37 @@
+{
+  "zarr_format": 3,
+  "node_type": "group",
+  "attributes": {
+    "ome": {
+      "version": "0.5",
+      "multiscales": [
+        {
+          "axes": [
+            {
+              "type": "space",
+              "unit": "micrometer"
+            },
+            {
+              "type": "space",
+              "unit": "micrometer"
+            }
+          ],
+          "datasets": [
+            {
+              "path": "0",
+              "coordinateTransformations": [
+                {
+                  "scale": [
+                    0.13,
+                    0.13
+                  ],
+                  "type": "scale"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

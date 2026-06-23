@@ -1,0 +1,40 @@
+{
+  "ome": {
+    "version": "0.5",
+    "multiscales": [
+      {
+        "axes": [
+          {
+            "name": "y",
+            "type": "space",
+            "unit": "micrometer"
+          },
+          {
+            "name": "x",
+            "type": "space",
+            "unit": "micrometer"
+          }
+        ],
+        "datasets": [
+          {
+            "path": "0",
+            "coordinateTransformations": [
+              {
+                "scale": [
+                  1,
+                  1
+                ],
+                "type": "scale"
+              }
+            ]
+          }
+        ],
+        "name": "simple_image",
+        "type": "foo",
+        "metadata": {
+          "key": "value"
+        }
+      }
+    ]
+  }
+}
