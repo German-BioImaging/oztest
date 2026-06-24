@@ -1,0 +1,21 @@
+{
+  "plate": {
+    "columns": [
+      {
+        "name": "A"
+      }
+    ],
+    "rows": [
+      {
+        "name": "A1"
+      }
+    ],
+    "wells": [
+      {
+        "path": "A/A1",
+        "rowIndex": 0,
+        "columnIndex": 0
+      }
+    ]
+  }
+}
