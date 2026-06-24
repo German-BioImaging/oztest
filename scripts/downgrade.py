@@ -1,3 +1,11 @@
+#!/usr/bin/env -S uv run --script
+# /// script
+# requires-python = ">=3.10"
+# dependencies = ["ozconf"]
+#
+# [tool.uv.sources]
+# ozconf = { path = "..", editable = true }
+# ///
 """Dev tool: derive draft v0.5 `validate_zarr` cases from the existing v0.6 ones.
 
 OME-Zarr v0.6 (RFC-5) replaced a single implicit per-image coordinate space
@@ -32,7 +40,7 @@ from typing import Any
 
 from rich import print
 
-from ..case_filter import Case, CaseFilter
+from ozconf.case_filter import Case, CaseFilter, make_kind_filter
 
 logger = logging.getLogger(__name__)
 
@@ -240,3 +248,20 @@ def run_downgrade(cases: CaseFilter, output_root: Path) -> None:
         print(
             case.slug(), f"[{colour[status]}]{status}[/{colour[status]}]", msg, sep="\t"
         )
+
+
+if __name__ == "__main__":
+    import argparse
+
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "output_root",
+        type=Path,
+        nargs="?",
+        default=Path(__file__).parent.parent / "cases" / "validate_zarr" / "v0.5",
+        help="directory to write draft v0.5 cases into (default: cases/validate_zarr/v0.5)",
+    )
+    args = parser.parse_args()
+
+    cases = CaseFilter(kind_filter=make_kind_filter(["validate_zarr"]))
+    run_downgrade(cases, args.output_root)
