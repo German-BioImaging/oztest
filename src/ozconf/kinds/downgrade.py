@@ -193,9 +193,7 @@ KIND_HANDLERS = {
 def downgrade_attributes(attributes: dict, case_type: str) -> dict:
     """Takes the `attributes` object of a v0.6 zarr.json; returns the v0.5 equivalent.
 
-    Drops `_conformance` (it's not consumed by ozconf's own runner, and the
-    hand-written v0.5 reference cases omit it too). Raises NotRepresentable
-    if the case relies on a v0.6-only capability.
+    Raises NotRepresentable if the case relies on a v0.6-only capability.
     """
     handler = KIND_HANDLERS.get(case_type)
     if handler is None:
