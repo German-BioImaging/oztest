@@ -57,11 +57,6 @@
           ]
         }
       ]
-    },
-    "_conformance": {
-      "schema": {
-        "id": "schemas/strict_image.schema"
-      }
     }
   }
 }

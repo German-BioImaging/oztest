@@ -19,13 +19,6 @@
           }
         ]
       }
-    },
-    "_conformance": {
-      "schema": {
-        "id": "ate.schema"
-      },
-      "description": "Tests for the plate JSON schema: ",
-      "valid": false
     }
   }
 }

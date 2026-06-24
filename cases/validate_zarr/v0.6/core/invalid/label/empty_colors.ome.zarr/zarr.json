@@ -7,13 +7,6 @@
       "image-label": {
         "colors": []
       }
-    },
-    "_conformance": {
-      "schema": {
-        "id": "schemas/label.schema"
-      },
-      "description": "Tests for the image-label JSON schema: ",
-      "valid": false
     }
   }
 }

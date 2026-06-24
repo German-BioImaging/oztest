@@ -160,11 +160,6 @@
         },
         "version": "0.6.dev4"
       }
-    },
-    "_conformance": {
-      "schema": {
-        "id": "schemas/strict_image.schema"
-      }
     }
   }
 }

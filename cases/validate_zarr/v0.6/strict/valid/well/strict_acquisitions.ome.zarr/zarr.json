@@ -12,12 +12,6 @@
           }
         ]
       }
-    },
-    "_conformance": {
-      "schema": {
-        "id": "schemas/strict_well.schema"
-      },
-      "description": "Tests for the strict well JSON schema: "
     }
   }
 }

@@ -30,19 +30,17 @@
                   1
                 ],
                 "type": "scale",
-                "input": {"name": "s0"},
-                "output": {"name": "intrinsic"}
+                "input": {
+                  "name": "s0"
+                },
+                "output": {
+                  "name": "intrinsic"
+                }
               }
             ]
           }
         ]
       }
     ]
-  },
-  "_conformance": {
-    "schema": {
-      "id": "schemas/image.schema"
-    },
-    "valid": false
   }
 }

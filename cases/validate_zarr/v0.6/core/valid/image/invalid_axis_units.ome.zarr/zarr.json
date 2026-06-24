@@ -41,11 +41,6 @@
           ]
         }
       ]
-    },
-    "_conformance": {
-      "schema": {
-        "id": "schemas/image.schema"
-      }
     }
   }
 }

@@ -21,12 +21,5 @@
         }
       ]
     }
-  },
-  "_conformance": {
-    "schema": {
-      "id": "schemas/strict_plate.schema"
-    },
-    "description": "Tests for the strict plate JSON schema: ",
-    "strict": true
   }
 }

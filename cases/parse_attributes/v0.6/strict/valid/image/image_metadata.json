@@ -17,8 +17,12 @@
                   1,
                   1
                 ],
-                "input": {"path": "path/to/0"},
-                "output": {"name": "physical"}
+                "input": {
+                  "path": "path/to/0"
+                },
+                "output": {
+                  "name": "physical"
+                }
               }
             ]
           }
@@ -54,11 +58,5 @@
         ]
       }
     ]
-  },
-  "_conformance": {
-    "schema": {
-      "id": "schemas/strict_image.schema"
-    },
-    "strict": true
   }
 }

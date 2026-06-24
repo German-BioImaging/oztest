@@ -45,8 +45,12 @@
                   1
                 ],
                 "type": "scale",
-                "input": {"path": "s0"},
-                "output": {"name": "physical"}
+                "input": {
+                  "path": "s0"
+                },
+                "output": {
+                  "name": "physical"
+                }
               }
             ]
           }
@@ -58,8 +62,12 @@
               10
             ],
             "type": "scale",
-            "input": {"name": "physical"},
-            "output": {"name": "world"}
+            "input": {
+              "name": "physical"
+            },
+            "output": {
+              "name": "world"
+            }
           }
         ],
         "name": "image_with_coordinateTransformations",
@@ -69,11 +77,5 @@
         }
       }
     ]
-  },
-  "_conformance": {
-    "schema": {
-      "id": "schemas/strict_image.schema"
-    },
-    "strict": true
   }
 }

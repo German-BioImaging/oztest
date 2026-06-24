@@ -2,11 +2,5 @@
   "ome": {
     "version": "0.6.dev4",
     "multiscales": []
-  },
-  "_conformance": {
-    "schema": {
-      "id": "schemas/image.schema"
-    },
-    "valid": false
   }
 }
