@@ -27,6 +27,10 @@ The path to each test from there is `{kind}/v{version}/{profile}/{validity}/{nam
 
 Tests are globally identified by a slug made up of the above path, minus the extension, e.g. `parse_attributes/v0.5/core/valid/easy_test`.
 
+For ease of navigation, tests can be further organised into arbitrary subdirectories within the `valid/`, `invalid/`
+level, e.g. `parse_attributes/v0.5/core/valid/image/easy/easy_test`. These subdirectories are not available
+for filtering.
+
 Implementors may supply their own additional test cases.
 In order to use them with the `ozconf` tool, they MUST be in a comparable directory hierarchy.
 Implementation-specific behaviour SHOULD be tested using a `profile` specific to that implementation.
