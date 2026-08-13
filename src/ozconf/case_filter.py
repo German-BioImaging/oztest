@@ -49,12 +49,7 @@ def case_kind_version_profile_validities(
 
 
 def _iter_files_recursive(trav, prefix: str = "") -> Iterable[tuple[str, Any]]:
-    """Recursively walk a Traversable, yielding (relative_path, Traversable) for every file found.
-
-    Test cases may be nested arbitrarily deeply under `validity`
-    (e.g. `invalid/image/foo.json`) purely for organisational purposes;
-    that nesting is not itself a filterable attribute.
-    """
+    """Recursively walk a Traversable, yielding (relative_path, Traversable) for every file found."""
     for item in trav.iterdir():
         if item.name.startswith("__") or item.name.startswith("."):
             continue
@@ -68,9 +63,14 @@ def _iter_files_recursive(trav, prefix: str = "") -> Iterable[tuple[str, Any]]:
 def case_kind_version_validity_names(
     case_kind_version_validity_trav,
 ) -> Iterable[tuple[str, Any]]:
-    """Given a case kind version validity Traversable, recursively iterate over all
+    """Given a `kind`/`version`/`profile`/`validity` Traversable, recursively iterate over all
     contained test case files (at any depth) and their associated Traversable.
-    The name yielded is the path relative to `validity`, minus extension."""
+    The name yielded is the path relative to `validity`, minus extension.
+
+    Test cases may be nested arbitrarily deeply under `validity`
+    (e.g. `invalid/image/foo.json`) purely for organisational purposes;
+    that nesting is not itself a filterable attribute.
+    """
     for rel, item in _iter_files_recursive(case_kind_version_validity_trav):
         name, _, ext = rel.rpartition(".")
         yield (name if ext else rel, item)
