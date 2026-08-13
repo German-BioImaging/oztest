@@ -25,7 +25,7 @@ def case_kinds(path: Path | None = None) -> Iterable[tuple[str, Any]]:
         yield (item.name, item)
 
 
-def case_kind_versions(case_kind_trav) -> Iterable[tuple[Version, Any]]:
+def case_kind_versions(case_kind_trav) -> Iterable[tuple["OzVersion", Any]]:
     """Given a case kind Traversable, iterate over the contained versions and their associated Traversable."""
     for d in case_kind_trav.iterdir():
         if d.name.startswith("v") and d.is_dir():
