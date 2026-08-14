@@ -1,11 +1,13 @@
 import asyncio
-from collections.abc import Awaitable
 import json
 import logging
 import subprocess as sp
-from ..case_filter import CaseFilter, Case
-from .common import JSON, Result, Status, format_status
+from collections.abc import Awaitable
+
 from rich import print
+
+from ..case_filter import Case, CaseFilter
+from .common import JSON, Result, Status, format_status
 
 logger = logging.getLogger(__name__)
 

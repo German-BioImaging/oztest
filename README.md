@@ -94,3 +94,14 @@ under the [python package version scheme](https://packaging.python.org/en/latest
 originally proposed in [PEP 440](https://peps.python.org/pep-0440/).
 
 See the [changelog](./CHANGELOG.md) for details on support for different OME-Zarr versions.
+
+## Contributing
+
+This project uses [just](https://github.com/casey/just) for common development tasks.
+Once installed, run `just` to see the available recipes.
+
+This project uses [prek](https://prek.j178.dev/) to run pre-commit validation.
+Run `just pre-commit-install` to install the hooks.
+
+CLI functionality is tested using [pytest](https://docs.pytest.org/en/stable/).
+Run `just test` to run the tests.

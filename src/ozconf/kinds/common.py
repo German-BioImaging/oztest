@@ -1,8 +1,8 @@
 from __future__ import annotations
-from typing import NamedTuple, Literal
+
+from typing import Literal, NamedTuple
 
 from ..case_filter import Case
-
 
 JSON = int | float | str | None | list["JSON"] | dict[str, "JSON"]
 Status = Literal["pass", "fail", "error", "skip"]
