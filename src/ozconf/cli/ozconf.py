@@ -1,20 +1,23 @@
 import asyncio
-import sys
-import typer
-from typing import Annotated, Literal
-from pathlib import Path
-import shutil
 import logging
+import shutil
+import sys
 from importlib.resources import as_file
+from pathlib import Path
+from typing import Annotated, Literal
+
+import typer
+
 from ..case_filter import (
+    CaseFilter,
     OzVersion,
     case_kinds,
-    CaseFilter,
     make_kind_filter,
     make_str_filter,
     make_validity_filter,
     make_version_filter,
 )
+from ..kinds.parse_attributes import run_parse_attributes
 from ..types import Kind, parse_dingus_invocation
 from .common import (
     CustomCasesArg,
@@ -24,14 +27,13 @@ from .common import (
     IncludeNameArgs,
     IncludeProfileArgs,
     IncludeValidityArgs,
+    InvokeDingusArgs,
     KindsArg,
     NoBuiltinArg,
+    VerbosityArg,
     VersionSpecifierArg,
     setup_logging,
-    VerbosityArg,
-    InvokeDingusArgs,
 )
-from ..kinds.parse_attributes import run_parse_attributes
 
 app = typer.Typer(no_args_is_help=True)
 
@@ -209,10 +211,11 @@ def dingus(
 ):
     """Internal testing tool."""
     setup_logging(verbosity)
+    logger = logging.getLogger(__name__).getChild("dingus")
     if args:
-        logging.info("Got arguments: %s", args)
+        logger.info("Got arguments: %s", args)
     else:
-        logging.info("Got no arguments")
+        logger.info("Got no arguments")
 
     if stdout is not None:
         print(stdout)

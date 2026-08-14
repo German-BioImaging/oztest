@@ -1,7 +1,8 @@
+import logging
 from pathlib import Path
 from typing import Annotated
+
 import typer
-import logging
 
 QUERY_MSG = """\n
 Query may be an exact substring;

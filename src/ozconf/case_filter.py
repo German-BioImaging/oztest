@@ -1,16 +1,16 @@
+import fnmatch
+import logging
+import os
+import re
 from collections.abc import Callable, Generator, Iterable, Iterator
 from contextlib import contextmanager
 from functools import total_ordering
+from importlib.resources import as_file, files
 from pathlib import Path
-import re
-import os
 from typing import Any
-import logging
-import fnmatch
 
-from importlib.resources import files, as_file
-from packaging.version import Version
 from packaging.specifiers import SpecifierSet
+from packaging.version import Version
 
 logger = logging.getLogger(__name__)
 
@@ -123,9 +123,7 @@ class Case:
             return True
         if self.validity < rhs.validity:
             return True
-        if self.name < rhs.name:
-            return True
-        return False
+        return self.name < rhs.name
 
     @contextmanager
     def as_path(self) -> Generator[Path]:
@@ -138,8 +136,8 @@ class Case:
 
     def slug(self) -> str:
         """Get the full identifier of the test case."""
-        return "/".join(
-            [self.kind, self.version.raw, self.profile, self.validity, self.name]
+        return (
+            f"{self.kind}/{self.version.raw}/{self.profile}/{self.validity}/{self.name}"
         )
 
     def __str__(self) -> str:
@@ -186,11 +184,11 @@ def make_validity_filter(
 
     def fn(validity: str) -> bool:
         v = validity.lower()
-        if include_set is not None and v not in include_set:
+        omitted_from_include = include_set is not None and v not in include_set
+        if omitted_from_include:
             return False
-        if exclude_set is not None and v in exclude_set:
-            return False
-        return True
+        excluded = exclude_set is not None and v in exclude_set
+        return not excluded
 
     return fn
 
@@ -229,11 +227,14 @@ def make_str_filter(
     excludes = None if exclude is None else [str_to_re(s) for s in exclude]
 
     def fn(s: str) -> bool:
-        if includes is not None and not any(r.match(s) for r in includes):
+        omitted_from_includes = includes is not None and not any(
+            r.match(s) for r in includes
+        )
+        if omitted_from_includes:
             return False
-        if excludes is not None and any(r.match(s) for r in excludes):
-            return False
-        return True
+
+        excluded = excludes is not None and any(r.match(s) for r in excludes)
+        return not excluded
 
     return fn
 
