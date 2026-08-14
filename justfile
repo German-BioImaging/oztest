@@ -1,6 +1,7 @@
 _:
     just --list
 
+# Install the pre-commit hooks so that they will be run automatically.
 pre-commit-install:
     uv run --group dev prek install
 
