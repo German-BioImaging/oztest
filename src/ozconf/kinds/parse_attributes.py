@@ -73,7 +73,7 @@ async def run_parse_attributes(dingus: list[str], cases: CaseFilter):
             status = "error"
             msg = "No output from dingus"
 
-        args = [tcase.slug(), format_status(status)]
+        args = [res.case.slug(), format_status(status)]
         if msg:
             args.append(msg)
         print(*args, sep="\t")
