@@ -1,0 +1,12 @@
+{
+  "ome": {
+    "image-label": {
+      "properties": [
+        {
+          "value": "foo"
+        }
+      ]
+    },
+    "version": "0.5"
+  }
+}

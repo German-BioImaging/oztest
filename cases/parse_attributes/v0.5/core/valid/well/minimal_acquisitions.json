@@ -1,0 +1,13 @@
+{
+  "ome": {
+    "version": "0.5",
+    "well": {
+      "images": [
+        {
+          "acquisition": 1,
+          "path": "0"
+        }
+      ]
+    }
+  }
+}

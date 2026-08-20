@@ -1,0 +1,43 @@
+{
+  "ome": {
+    "multiscales": [
+      {
+        "axes": [
+          {
+            "name": "X",
+            "type": "space"
+          },
+          {
+            "name": "z",
+            "type": "space"
+          },
+          {
+            "name": "y",
+            "type": "space"
+          },
+          {
+            "name": "x",
+            "type": "space"
+          }
+        ],
+        "datasets": [
+          {
+            "coordinateTransformations": [
+              {
+                "scale": [
+                  1,
+                  1,
+                  1,
+                  1
+                ],
+                "type": "scale"
+              }
+            ],
+            "path": "0"
+          }
+        ]
+      }
+    ],
+    "version": "0.5"
+  }
+}

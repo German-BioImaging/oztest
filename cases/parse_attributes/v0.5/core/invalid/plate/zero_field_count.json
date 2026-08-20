@@ -1,0 +1,25 @@
+{
+  "ome": {
+    "plate": {
+      "columns": [
+        {
+          "name": "1"
+        }
+      ],
+      "field_count": 0,
+      "rows": [
+        {
+          "name": "A"
+        }
+      ],
+      "wells": [
+        {
+          "columnIndex": 0,
+          "path": "A/1",
+          "rowIndex": 0
+        }
+      ]
+    },
+    "version": "0.5"
+  }
+}
