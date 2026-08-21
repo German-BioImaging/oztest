@@ -11,7 +11,7 @@ from typing import IO, Literal, NamedTuple
 from ..case_filter import Case
 
 JSON = int | float | str | None | list["JSON"] | dict[str, "JSON"]
-Status = Literal["pass", "fail", "error", "skip"]
+Status = Literal["pass", "fail", "error", "skip", "xfail"]
 
 logger = logging.getLogger(__name__)
 
@@ -21,7 +21,7 @@ def format_status(s: Status) -> str:
     match s:
         case "pass":
             fmt = "green"
-        case "skip":
+        case "skip" | "xfail":
             fmt = "yellow"
         case "fail":
             fmt = "red"

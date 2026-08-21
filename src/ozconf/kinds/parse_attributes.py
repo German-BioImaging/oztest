@@ -5,10 +5,12 @@ import subprocess as sp
 from collections.abc import Awaitable
 from dataclasses import dataclass
 from importlib.metadata import version
+from typing import Any, Self
 
 from rich import print as rprint
 
 from ..case_filter import Case, CaseFilter
+from ..types import Validity
 from .common import JSON, OutputConfig, Status, format_status
 
 logger = logging.getLogger(__name__)
@@ -50,9 +52,11 @@ async def run_parse_attributes_single(dingus: list[str], case: Case):
         status = "error"
 
     if res:
-        validity, msg = parse_output(res)  # type: ignore
-        if validity == case.validity:
+        output = Output.from_jso(res)  # type: ignore
+        if output.validity == case.validity:
             status = status or "pass"
+        elif output.xfail:
+            status = status or "xfail"
         else:
             status = status or "fail"
     else:
@@ -110,8 +114,25 @@ class ValidationResult:
         return d
 
 
-def parse_output(d: dict[str, JSON]):
-    return d.get("validity"), d.get("message")
+@dataclass
+class Output:
+    validity: Validity
+    message: str | None = None
+    xfail: bool = False
+
+    @classmethod
+    def from_jso(cls, d: dict[str, Any]) -> Self:
+        v = d.get("validity")
+        if v not in ("valid", "invalid"):
+            raise ValueError(f'"validity" must be "valid" or "invalid"; got {v!r}')
+        msg = d.get("message")
+        if msg is not None and not isinstance(msg, str):
+            raise TypeError(f'"message" must be a string; got {msg!r}')
+        xfail = d.get("xfail", False)
+        if not isinstance(xfail, bool):
+            raise TypeError(f'Expected boolean "xfail", got {xfail!r}')
+
+        return cls(v, msg, xfail)
 
 
 async def run_parse_attributes(

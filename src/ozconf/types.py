@@ -1,6 +1,7 @@
 from typing import Literal
 
 Kind = Literal["parse_attributes", "transform_coordinates", "validate_zarr"]
+Validity = Literal["valid", "invalid"]
 
 
 def parse_dingus_invocation(items: list[str] | None) -> None | list[str]:
