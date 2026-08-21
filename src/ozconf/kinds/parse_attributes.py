@@ -130,7 +130,7 @@ class Output:
             raise TypeError(f'"message" must be a string; got {msg!r}')
         xfail = d.get("xfail", False)
         if not isinstance(xfail, bool):
-            raise TypeError(f'Expected boolean "xfail", got {xfail!r}')
+            raise TypeError(f'"xfail" must be boolean, got {xfail!r}')
 
         return cls(v, msg, xfail)
 
