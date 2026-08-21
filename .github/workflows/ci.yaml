@@ -21,7 +21,7 @@ jobs:
       - uses: astral-sh/setup-uv@v9.0.0
         with:
           enable-cache: true
-      - uses: extractions/setup-just@v3
+      - uses: extractions/setup-just@v4
       - run: just pre-commit
 
   lint:
@@ -31,7 +31,7 @@ jobs:
       - uses: astral-sh/setup-uv@v9.0.0
         with:
           enable-cache: true
-      - uses: extractions/setup-just@v3
+      - uses: extractions/setup-just@v4
       - run: just lint
 
   test-os:
@@ -47,7 +47,7 @@ jobs:
       - uses: astral-sh/setup-uv@v9.0.0
         with:
           enable-cache: true
-      - uses: extractions/setup-just@v3
+      - uses: extractions/setup-just@v4
       - run: just test
 
   test-python:
@@ -65,7 +65,7 @@ jobs:
       - uses: astral-sh/setup-uv@v9.0.0
         with:
           enable-cache: true
-      - uses: extractions/setup-just@v3
+      - uses: extractions/setup-just@v4
       - run: just test
         env:
           UV_PYTHON: ${{ matrix.python-version }}
@@ -87,7 +87,7 @@ jobs:
   #         with:
   #           enable-cache: false
   #           python-version: ${{ matrix.python-version }}
-  #       - uses: extractions/setup-just@v3
+  #       - uses: extractions/setup-just@v4
   #       - run: just test
 
   publish:
