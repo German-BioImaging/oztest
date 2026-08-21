@@ -4,8 +4,6 @@ from typing import Annotated, Literal
 
 import typer
 
-from ..types import Validity
-
 QUERY_MSG = """\n
 Query may be an exact substring;
 or a UNIX-style filename matcher if it has the special characters `*`, `?`, `[`, `]`;
@@ -43,7 +41,7 @@ ExcludeProfileArgs = Annotated[
     ),
 ]
 IncludeValidityArgs = Annotated[
-    list[Validity] | None,
+    list[str] | None,
     typer.Option(
         "--include-validity",
         "-a",
@@ -51,7 +49,7 @@ IncludeValidityArgs = Annotated[
     ),
 ]
 ExcludeValidityArgs = Annotated[
-    list[Validity] | None,
+    list[str] | None,
     typer.Option(
         "--exclude-validity",
         "-A",
