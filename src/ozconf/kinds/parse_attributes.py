@@ -91,7 +91,7 @@ class ValidationResult:
             d.update(
                 {
                     "kind": self.case.kind,
-                    "oz_version": self.case.version.raw,
+                    "oz_version": str(self.case.version),
                     "profile": self.case.profile,
                     "expected_validity": self.case.validity,
                     "name": self.case.name,
@@ -134,7 +134,7 @@ async def run_parse_attributes(
                 "results": results,
             }
             with output.open() as f:
-                json.dump(jso, f, indent=2, sort_keys=True)
+                json.dump(jso, f, indent=2)
         case "tsv":
             with output.open() as f:
                 delim = "\t"
