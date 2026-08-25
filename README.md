@@ -37,7 +37,7 @@ Implementation-specific behaviour SHOULD be tested using a `profile` specific to
 
 ## Using the conformance tester
 
-Install the `ozconf` python package using uv, pipx, or pip, and invoke it from your terminal with `ozconf`.
+Install the `ozconf` python package using **uv**, pipx, or pip, and invoke it from your terminal with `ozconf`.
 Alternatively, run it within an ephemeral environment with `uvx ozconf` (requires uv).
 
 The tool allows you to
