@@ -5,7 +5,7 @@ import subprocess as sp
 from collections.abc import Awaitable
 from dataclasses import dataclass
 from importlib.metadata import version
-from typing import Any, Self
+from typing import Any
 
 from rich import print as rprint
 
@@ -119,7 +119,7 @@ class Output:
     xfail: bool = False
 
     @classmethod
-    def from_jso(cls, d: dict[str, Any]) -> Self:
+    def from_jso(cls, d: dict[str, Any]):
         v = d.get("validity")
         if v not in ("valid", "invalid"):
             raise ValueError(f'"validity" must be "valid" or "invalid"; got {v!r}')
