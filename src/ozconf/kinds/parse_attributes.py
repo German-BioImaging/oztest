@@ -86,7 +86,7 @@ class ValidationResult:
         return out
 
     def to_dict(self, full=True, color=False) -> dict[str, str]:
-        d = {}
+        d = {"slug": self.case.slug()}
         if full:
             d.update(
                 {
@@ -97,8 +97,6 @@ class ValidationResult:
                     "name": self.case.name,
                 }
             )
-
-        d["slug"] = self.case.slug()
 
         if color:
             d["result"] = format_status(self.status)
