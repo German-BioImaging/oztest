@@ -90,19 +90,17 @@ class ValidationResult:
         return out
 
     def to_dict(self, full=True, color=False) -> dict[str, str]:
-        d = {}
+        d = {"slug": self.case.slug()}
         if full:
             d.update(
                 {
                     "kind": self.case.kind,
-                    "oz_version": self.case.version.raw,
+                    "oz_version": str(self.case.version),
                     "profile": self.case.profile,
                     "expected_validity": self.case.validity,
                     "name": self.case.name,
                 }
             )
-
-        d["slug"] = self.case.slug()
 
         if color:
             d["result"] = format_status(self.status)
