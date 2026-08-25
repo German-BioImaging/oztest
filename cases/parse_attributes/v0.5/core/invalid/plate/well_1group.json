@@ -13,6 +13,7 @@
       ],
       "wells": [
         {
+          "columnIndex": 0,
           "path": "A1",
           "rowIndex": 0
         }

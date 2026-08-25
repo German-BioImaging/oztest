@@ -12,6 +12,7 @@
     ],
     "wells": [
       {
+        "columnIndex": 0,
         "path": "plate/A/1",
         "rowIndex": 0
       }
