@@ -1,0 +1,52 @@
+{
+  "_conformance": {
+    "description": "Tests for the image JSON schema: identity transformation",
+    "schema": {
+      "id": "schemas/image.schema"
+    }
+  },
+  "ome": {
+    "multiscales": [
+      {
+        "coordinateSystems": [
+          {
+            "axes": [
+              {
+                "discrete": false,
+                "name": "y",
+                "type": "space",
+                "unit": "micrometer"
+              },
+              {
+                "discrete": false,
+                "name": "x",
+                "type": "space",
+                "unit": "micrometer"
+              }
+            ],
+            "name": "physical"
+          }
+        ],
+        "datasets": [
+          {
+            "coordinateTransformations": [
+              {
+                "input": {
+                  "path": "array"
+                },
+                "name": "transform-name",
+                "output": {
+                  "name": "physical"
+                },
+                "type": "identity"
+              }
+            ],
+            "path": "array"
+          }
+        ],
+        "name": "multiscales"
+      }
+    ],
+    "version": "0.6rc0"
+  }
+}

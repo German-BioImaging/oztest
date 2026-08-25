@@ -1,0 +1,32 @@
+{
+  "_conformance": {
+    "schema": {
+      "id": "schemas/image.schema"
+    },
+    "valid": false
+  },
+  "ome": {
+    "multiscales": [
+      {
+        "coordinateSystems": [
+          {
+            "axes": [
+              {
+                "name": "y",
+                "type": "space",
+                "unit": "micrometer"
+              },
+              {
+                "name": "x",
+                "type": "space",
+                "unit": "micrometer"
+              }
+            ],
+            "name": "intrinsic"
+          }
+        ]
+      }
+    ],
+    "version": "0.6rc0"
+  }
+}

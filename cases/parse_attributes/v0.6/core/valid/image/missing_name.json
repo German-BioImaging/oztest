@@ -1,0 +1,63 @@
+{
+  "_conformance": {
+    "schema": {
+      "id": "schemas/image.schema"
+    }
+  },
+  "ome": {
+    "multiscales": [
+      {
+        "coordinateSystems": [
+          {
+            "axes": [
+              {
+                "name": "y",
+                "type": "space",
+                "unit": "micrometer"
+              },
+              {
+                "name": "x",
+                "type": "space",
+                "unit": "micrometer"
+              }
+            ],
+            "name": "intrinsic"
+          }
+        ],
+        "datasets": [
+          {
+            "coordinateTransformations": [
+              {
+                "input": {
+                  "path": "path/to/0"
+                },
+                "output": {
+                  "name": "intrinsic"
+                },
+                "scale": [
+                  1,
+                  1
+                ],
+                "type": "scale"
+              }
+            ],
+            "path": "path/to/0"
+          }
+        ],
+        "metadata": {
+          "args": [
+            "true",
+            "false"
+          ],
+          "kwargs": {
+            "multichannel": true
+          },
+          "method": "skimage.transform.pyramid_gaussian",
+          "version": "0.16.1"
+        },
+        "type": "gaussian"
+      }
+    ],
+    "version": "0.6rc0"
+  }
+}

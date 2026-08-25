@@ -1,0 +1,38 @@
+{
+  "attributes": {
+    "_conformance": {
+      "description": "Tests for the image-label JSON schema: ",
+      "schema": {
+        "id": "bel.schema"
+      },
+      "valid": false
+    },
+    "ome": {
+      "image-label": {
+        "colors": [
+          {
+            "label-value": 1,
+            "rgba": [
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "label-value": 1,
+            "rgba": [
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ]
+      },
+      "version": "0.6rc0"
+    }
+  },
+  "node_type": "group",
+  "zarr_format": 3
+}

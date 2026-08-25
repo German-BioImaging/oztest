@@ -1,0 +1,32 @@
+{
+  "_conformance": {
+    "description": "Tests for the strict plate JSON schema: ",
+    "schema": {
+      "id": "schemas/strict_plate.schema"
+    },
+    "strict": true,
+    "valid": false
+  },
+  "ome": {
+    "plate": {
+      "columns": [
+        {
+          "name": "A"
+        }
+      ],
+      "rows": [
+        {
+          "name": "1"
+        }
+      ],
+      "wells": [
+        {
+          "columnIndex": 0,
+          "path": "A/1",
+          "rowIndex": 0
+        }
+      ]
+    },
+    "version": "0.6rc02"
+  }
+}

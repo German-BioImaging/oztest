@@ -1,0 +1,65 @@
+{
+  "_conformance": {
+    "schema": {
+      "id": "schemas/image.schema"
+    },
+    "valid": false
+  },
+  "ome": {
+    "multiscales": [
+      {
+        "coordinateSystems": [
+          {
+            "axes": [
+              {
+                "discrete": false,
+                "name": "y",
+                "type": "space",
+                "unit": "micrometer"
+              },
+              {
+                "discrete": false,
+                "name": "x",
+                "type": "space",
+                "unit": "micrometer"
+              }
+            ],
+            "name": "physical"
+          }
+        ],
+        "coordinateTransformations": [
+          {
+            "affine": [
+              [
+                1,
+                0,
+                0
+              ],
+              [
+                0,
+                1,
+                0
+              ]
+            ],
+            "type": "affine"
+          }
+        ],
+        "datasets": [
+          {
+            "coordinateTransformations": [
+              {
+                "input": "array",
+                "name": "transform-name",
+                "output": "physical",
+                "type": "identity"
+              }
+            ],
+            "path": "array"
+          }
+        ],
+        "name": "multiscales"
+      }
+    ],
+    "version": "0.6rc0"
+  }
+}

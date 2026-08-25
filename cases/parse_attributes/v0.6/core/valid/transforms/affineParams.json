@@ -1,0 +1,86 @@
+{
+  "_conformance": {
+    "description": "Tests for the image JSON schema: ",
+    "schema": {
+      "id": "schemas/image.schema"
+    }
+  },
+  "ome": {
+    "multiscales": [
+      {
+        "coordinateSystems": [
+          {
+            "axes": [
+              {
+                "discrete": false,
+                "name": "y",
+                "type": "space",
+                "unit": "micrometer"
+              },
+              {
+                "discrete": false,
+                "name": "x",
+                "type": "space",
+                "unit": "micrometer"
+              }
+            ],
+            "name": "sheared"
+          },
+          {
+            "axes": [
+              {
+                "discrete": false,
+                "name": "y",
+                "type": "space",
+                "unit": "micrometer"
+              },
+              {
+                "discrete": false,
+                "name": "x",
+                "type": "space",
+                "unit": "micrometer"
+              }
+            ],
+            "name": "physical"
+          }
+        ],
+        "coordinateTransformations": [
+          {
+            "input": {
+              "name": "physical"
+            },
+            "name": "shearing-transform",
+            "output": {
+              "name": "sheared"
+            },
+            "path": "affineParams",
+            "type": "affine"
+          }
+        ],
+        "datasets": [
+          {
+            "coordinateTransformations": [
+              {
+                "input": {
+                  "path": "array"
+                },
+                "name": "array-to-physical",
+                "output": {
+                  "name": "physical"
+                },
+                "scale": [
+                  0.5,
+                  0.5
+                ],
+                "type": "scale"
+              }
+            ],
+            "path": "array"
+          }
+        ],
+        "name": "multiscales"
+      }
+    ],
+    "version": "0.6rc0"
+  }
+}

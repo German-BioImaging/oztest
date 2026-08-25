@@ -1,0 +1,103 @@
+{
+  "_conformance": {
+    "schema": {
+      "id": "schemas/image.schema"
+    },
+    "valid": false
+  },
+  "ome": {
+    "multiscales": [
+      {
+        "coordinateSystems": [
+          {
+            "axes": [
+              {
+                "discrete": false,
+                "name": "z",
+                "type": "space",
+                "unit": "micrometer"
+              },
+              {
+                "discrete": false,
+                "name": "y",
+                "type": "space",
+                "unit": "micrometer"
+              },
+              {
+                "discrete": false,
+                "name": "x",
+                "type": "space",
+                "unit": "micrometer"
+              }
+            ],
+            "name": "physical"
+          },
+          {
+            "axes": [
+              {
+                "discrete": false,
+                "name": "z",
+                "type": "space",
+                "unit": "micrometer"
+              },
+              {
+                "discrete": false,
+                "name": "y",
+                "type": "space",
+                "unit": "micrometer"
+              },
+              {
+                "discrete": false,
+                "name": "x",
+                "type": "space",
+                "unit": "micrometer"
+              }
+            ],
+            "name": "output"
+          }
+        ],
+        "coordinateTransformations": [
+          {
+            "input": "physical",
+            "name": "some_additional_transform",
+            "output": "output",
+            "type": "affine"
+          }
+        ],
+        "datasets": [
+          {
+            "coordinateTransformations": [
+              {
+                "input": "array",
+                "name": "transform-name",
+                "output": "physical",
+                "transformations": [
+                  {
+                    "scale": [
+                      1,
+                      1,
+                      1
+                    ],
+                    "type": "scale"
+                  },
+                  {
+                    "translation": [
+                      30,
+                      20,
+                      10
+                    ],
+                    "type": "translation"
+                  }
+                ],
+                "type": "sequence"
+              }
+            ],
+            "path": "array"
+          }
+        ],
+        "name": "multiscales"
+      }
+    ],
+    "version": "0.6rc0"
+  }
+}

@@ -1,0 +1,87 @@
+{
+  "_conformance": {
+    "description": "Tests for the scene JSON schema: ",
+    "schema": {
+      "id": "schemas/scene.schema"
+    },
+    "valid": false
+  },
+  "ome": {
+    "scene": {
+      "coordinateSystems": [
+        {
+          "axes": [
+            {
+              "discrete": false,
+              "name": "x",
+              "type": "space",
+              "unit": "micrometer"
+            },
+            {
+              "discrete": false,
+              "name": "y",
+              "type": "space",
+              "unit": "micrometer"
+            }
+          ],
+          "name": "world"
+        }
+      ],
+      "coordinateTransformations": [
+        {
+          "input": {
+            "name": "physical",
+            "path": "tile_0"
+          },
+          "name": "tile_0_mm to world",
+          "output": "world",
+          "translation": [
+            0,
+            0
+          ],
+          "type": "translation"
+        },
+        {
+          "input": {
+            "name": "physical",
+            "path": "tile_1"
+          },
+          "name": "tile_1_mm to world",
+          "output": "world",
+          "translation": [
+            0,
+            348
+          ],
+          "type": "translation"
+        },
+        {
+          "input": {
+            "name": "physical",
+            "path": "tile_2"
+          },
+          "name": "tile_2_mm to world",
+          "output": "world",
+          "translation": [
+            276,
+            0
+          ],
+          "type": "translation"
+        },
+        {
+          "input": {
+            "name": "physical",
+            "path": "tile_3"
+          },
+          "name": "tile_3_mm to world",
+          "output": "world",
+          "translation": [
+            276,
+            348
+          ],
+          "type": "translation"
+        }
+      ]
+    },
+    "version": "0.6rc0"
+  }
+}

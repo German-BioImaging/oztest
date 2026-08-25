@@ -1,0 +1,172 @@
+{
+  "_conformance": {
+    "description": "Tests for a JSON document with an affine transformation",
+    "schema": {
+      "id": "schemas/image.schema"
+    },
+    "valid": true
+  },
+  "ome": {
+    "multiscales": [
+      {
+        "coordinateSystems": [
+          {
+            "axes": [
+              {
+                "discrete": false,
+                "name": "y",
+                "type": "space",
+                "unit": "micrometer"
+              },
+              {
+                "discrete": false,
+                "name": "x",
+                "type": "space",
+                "unit": "micrometer"
+              }
+            ],
+            "name": "sheared"
+          },
+          {
+            "axes": [
+              {
+                "discrete": false,
+                "name": "y",
+                "type": "space",
+                "unit": "micrometer"
+              },
+              {
+                "discrete": false,
+                "name": "x",
+                "type": "space",
+                "unit": "micrometer"
+              }
+            ],
+            "name": "physical"
+          }
+        ],
+        "coordinateTransformations": [
+          {
+            "affine": [
+              [
+                3,
+                0.4,
+                30
+              ],
+              [
+                0.3,
+                2,
+                20
+              ]
+            ],
+            "input": {
+              "name": "physical"
+            },
+            "name": "physical-to-sheared",
+            "output": {
+              "name": "sheared"
+            },
+            "type": "affine"
+          }
+        ],
+        "datasets": [
+          {
+            "coordinateTransformations": [
+              {
+                "input": {
+                  "path": "s0"
+                },
+                "name": "scale0_to_physical",
+                "output": {
+                  "name": "physical"
+                },
+                "transformations": [
+                  {
+                    "scale": [
+                      1,
+                      1
+                    ],
+                    "type": "scale"
+                  },
+                  {
+                    "translation": [
+                      0,
+                      0
+                    ],
+                    "type": "translation"
+                  }
+                ],
+                "type": "sequence"
+              }
+            ],
+            "path": "s0"
+          },
+          {
+            "coordinateTransformations": [
+              {
+                "input": {
+                  "path": "s1"
+                },
+                "name": "scale1_to_physical",
+                "output": {
+                  "name": "physical"
+                },
+                "transformations": [
+                  {
+                    "scale": [
+                      2,
+                      2
+                    ],
+                    "type": "scale"
+                  },
+                  {
+                    "translation": [
+                      0.7071,
+                      0.7071
+                    ],
+                    "type": "translation"
+                  }
+                ],
+                "type": "sequence"
+              }
+            ],
+            "path": "s1"
+          },
+          {
+            "coordinateTransformations": [
+              {
+                "input": {
+                  "path": "s2"
+                },
+                "name": "scale2_to_physical",
+                "output": {
+                  "name": "physical"
+                },
+                "transformations": [
+                  {
+                    "scale": [
+                      4,
+                      4
+                    ],
+                    "type": "scale"
+                  },
+                  {
+                    "translation": [
+                      2.1213,
+                      2.1213
+                    ],
+                    "type": "translation"
+                  }
+                ],
+                "type": "sequence"
+              }
+            ],
+            "path": "s2"
+          }
+        ],
+        "name": "multiscales"
+      }
+    ],
+    "version": "0.6rc0"
+  }
+}

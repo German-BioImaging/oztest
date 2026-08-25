@@ -1,0 +1,24 @@
+{
+  "_conformance": {
+    "description": "Tests for the image-label JSON schema: ",
+    "schema": {
+      "id": "schemas/label.schema"
+    },
+    "valid": false
+  },
+  "ome": {
+    "image-label": {
+      "colors": [
+        {
+          "rgba": [
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    },
+    "version": "0.6rc0"
+  }
+}

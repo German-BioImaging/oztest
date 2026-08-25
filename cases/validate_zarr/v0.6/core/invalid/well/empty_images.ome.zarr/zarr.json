@@ -1,0 +1,16 @@
+{
+  "attributes": {
+    "_conformance": {
+      "description": "Tests for the well JSON schema: ",
+      "schema": {
+        "id": "schemas/well.schema"
+      },
+      "valid": false
+    },
+    "well": {
+      "images": []
+    }
+  },
+  "node_type": "group",
+  "zarr_format": 3
+}

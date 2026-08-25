@@ -1,0 +1,70 @@
+{
+  "_conformance": {
+    "schema": {
+      "id": "schemas/image.schema"
+    },
+    "valid": false
+  },
+  "ome": {
+    "multiscales": [
+      {
+        "coordinateSystems": [
+          {
+            "axes": [
+              {
+                "name": "angle",
+                "type": "custom"
+              },
+              {
+                "name": "t",
+                "type": "time"
+              },
+              {
+                "name": "c",
+                "type": "channel"
+              },
+              {
+                "name": "z",
+                "type": "space"
+              },
+              {
+                "name": "y",
+                "type": "space"
+              },
+              {
+                "name": "x",
+                "type": "space"
+              }
+            ],
+            "name": "intrinsic"
+          }
+        ],
+        "datasets": [
+          {
+            "coordinateTransformations": [
+              {
+                "input": {
+                  "path": "s0"
+                },
+                "output": {
+                  "name": "intrinsic"
+                },
+                "scale": [
+                  1,
+                  1,
+                  1,
+                  1,
+                  1,
+                  1
+                ],
+                "type": "scale"
+              }
+            ],
+            "path": "s0"
+          }
+        ]
+      }
+    ],
+    "version": "0.6rc0"
+  }
+}

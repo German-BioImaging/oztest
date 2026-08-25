@@ -1,0 +1,20 @@
+{
+  "_conformance": {
+    "description": "Tests for the strict well JSON schema: ",
+    "schema": {
+      "id": "schemas/strict_well.schema"
+    },
+    "strict": true
+  },
+  "ome": {
+    "version": "0.6rc0",
+    "well": {
+      "images": [
+        {
+          "acquisition": 0,
+          "path": "0"
+        }
+      ]
+    }
+  }
+}

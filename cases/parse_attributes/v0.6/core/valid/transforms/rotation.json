@@ -1,0 +1,95 @@
+{
+  "_conformance": {
+    "description": "Tests for the image JSON schema: ",
+    "schema": {
+      "id": "schemas/image.schema"
+    }
+  },
+  "ome": {
+    "multiscales": [
+      {
+        "coordinateSystems": [
+          {
+            "axes": [
+              {
+                "discrete": false,
+                "name": "y",
+                "type": "space",
+                "unit": "micrometer"
+              },
+              {
+                "discrete": false,
+                "name": "x",
+                "type": "space",
+                "unit": "micrometer"
+              }
+            ],
+            "name": "rotated"
+          },
+          {
+            "axes": [
+              {
+                "discrete": false,
+                "name": "y",
+                "type": "space",
+                "unit": "micrometer"
+              },
+              {
+                "discrete": false,
+                "name": "x",
+                "type": "space",
+                "unit": "micrometer"
+              }
+            ],
+            "name": "physical"
+          }
+        ],
+        "coordinateTransformations": [
+          {
+            "input": {
+              "name": "physical"
+            },
+            "name": "rotation",
+            "output": {
+              "name": "rotated"
+            },
+            "rotation": [
+              [
+                0,
+                1
+              ],
+              [
+                -1,
+                0
+              ]
+            ],
+            "type": "rotation"
+          }
+        ],
+        "datasets": [
+          {
+            "coordinateTransformations": [
+              {
+                "input": {
+                  "path": "array"
+                },
+                "name": "array to physical",
+                "output": {
+                  "name": "physical"
+                },
+                "scale": [
+                  1,
+                  1
+                ],
+                "type": "scale"
+              }
+            ],
+            "path": "array"
+          }
+        ],
+        "name": "multiscales"
+      }
+    ],
+    "version": "0.6rc0"
+  }
+}

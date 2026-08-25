@@ -1,0 +1,33 @@
+{
+  "_conformance": {
+    "description": "Tests for the scene JSON schema: ",
+    "schema": {
+      "id": "schemas/scene.schema"
+    },
+    "valid": false
+  },
+  "ome": {
+    "scene": {
+      "coordinateSystems": [
+        {
+          "axes": [
+            {
+              "discrete": false,
+              "name": "x",
+              "type": "space",
+              "unit": "micrometer"
+            },
+            {
+              "discrete": false,
+              "name": "y",
+              "type": "space",
+              "unit": "micrometer"
+            }
+          ],
+          "name": "world"
+        }
+      ]
+    },
+    "version": "0.6rc0"
+  }
+}
