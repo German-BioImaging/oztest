@@ -75,7 +75,7 @@ class ValidationResult:
 
     @classmethod
     def field_names(cls, full=True) -> list[str]:
-        out = []
+        out = ["slug"]
         if full:
             out.extend(
                 [
@@ -86,7 +86,7 @@ class ValidationResult:
                     "name",
                 ]
             )
-        out.extend(["slug", "result", "message"])
+        out.extend(["result", "message"])
         return out
 
     def to_dict(self, full=True, color=False) -> dict[str, str]:
