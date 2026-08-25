@@ -134,7 +134,7 @@ async def run_parse_attributes(
                 "results": results,
             }
             with output.open() as f:
-                json.dump(jso, f, indent=2)
+                json.dump(jso, f, indent=2, sort_keys=True)
         case "tsv":
             with output.open() as f:
                 delim = "\t"
