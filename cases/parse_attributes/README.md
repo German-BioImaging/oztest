@@ -23,3 +23,25 @@ Nonzero exit codes will be reported with status `error`.
 | `"validity"` | yes | `"valid"` or `"invalid"` | Validity of the metadata document |
 | `"xfail"` | no, default `false` | boolean | Whether a failure should be reported with status `xfail` instead of `fail`. |
 | `"message"` | no | string | Free text to be reported. |
+
+### Example
+
+The dingus script for some fictitious OME-Zarr implementation in python may look like:
+
+```python
+#!/usr/bin/env python3
+import json
+import sys
+
+import my_ome_zarr_impl
+
+attrs = json.load(open(sys.argv[1]))
+try:
+    ome_zarr_attrs = my_ome_zarr_impl.parse_attrs(attrs, validate=True)
+    d = {"validity": "valid", "message": f"Got {type(ome_zarr_attrs)}"}
+except my_ome_zarr_impl.NotSupportedError as e:
+    d = {"validity": "invalid", "message": str(e), "xfail": True}
+except my_ome_zarr_impl.ValidationError as e:
+    d = {"validity": "invalid", "message": str(e)}
+print(json.dumps(d))
+```
