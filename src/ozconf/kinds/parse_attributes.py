@@ -3,11 +3,13 @@ import json
 import logging
 import subprocess as sp
 from collections.abc import Awaitable
+from dataclasses import dataclass
+from importlib.metadata import version
 
-from rich import print
+from rich import print as rprint
 
 from ..case_filter import Case, CaseFilter
-from .common import JSON, Result, Status, format_status
+from .common import JSON, OutputConfig, Status, format_status
 
 logger = logging.getLogger(__name__)
 
@@ -38,42 +40,107 @@ async def run_parse_attributes_single(dingus: list[str], case: Case):
         )
         return_code = await proc.wait()
 
-        res, stderr = await asyncio.gather(
+        res, _stderr = await asyncio.gather(
             read_json(proc.stdout, logger), read_stream(proc.stderr)
         )
 
-        return Result(case, cmd, return_code, res, stderr)
+    status: Status | None = None
+    msg: str | None = None
+    if return_code != 0:
+        status = "error"
+
+    if res:
+        validity, msg = parse_output(res)  # type: ignore
+        if validity == case.validity:
+            status = status or "pass"
+        else:
+            status = status or "fail"
+    else:
+        status = "error"
+        msg = "No output from dingus"
+
+    return ValidationResult(case, cmd, status, msg)
+
+
+@dataclass
+class ValidationResult:
+    case: Case
+    invocation: list[str]
+    status: Status
+    message: str | None
+
+    @classmethod
+    def field_names(cls, full=True) -> list[str]:
+        out = []
+        if full:
+            out.extend(
+                [
+                    "kind",
+                    "oz_version",
+                    "profile",
+                    "expected_validity",
+                    "name",
+                ]
+            )
+        out.extend(["slug", "result", "message"])
+        return out
+
+    def to_dict(self, full=True, color=False) -> dict[str, str]:
+        d = {"slug": self.case.slug()}
+        if full:
+            d.update(
+                {
+                    "kind": self.case.kind,
+                    "oz_version": str(self.case.version),
+                    "profile": self.case.profile,
+                    "expected_validity": self.case.validity,
+                    "name": self.case.name,
+                }
+            )
+
+        if color:
+            d["result"] = format_status(self.status)
+        else:
+            d["result"] = self.status
+
+        if self.message is not None:
+            d["message"] = self.message
+        return d
 
 
 def parse_output(d: dict[str, JSON]):
     return d.get("validity"), d.get("message")
 
 
-async def run_parse_attributes(dingus: list[str], cases: CaseFilter):
-    futs: list[Awaitable[Result]] = []
+async def run_parse_attributes(
+    dingus: list[str], cases: CaseFilter, output: OutputConfig
+):
+    futs: list[Awaitable[ValidationResult]] = []
     for tcase, should_run in cases:
         if not should_run:
             continue
         futs.append(run_parse_attributes_single(dingus, tcase))
 
-    for fut in futs:
-        status: Status | None = None
-        msg: str | None = None
-        res = await fut
-        if res.return_code != 0:
-            status = "error"
+    out = await asyncio.gather(*futs)
 
-        if res.output:
-            validity, msg = parse_output(res.output)  # type: ignore
-            if validity == res.case.validity:
-                status = status or "pass"
-            else:
-                status = status or "fail"
-        else:
-            status = "error"
-            msg = "No output from dingus"
-
-        args = [res.case.slug(), format_status(status)]
-        if msg:
-            args.append(msg)
-        print(*args, sep="\t")
+    match output.format:
+        case "json":
+            results = [v.to_dict(True, False) for v in out]
+            jso = {
+                "command": dingus,
+                "ozconf_version": version("ozconf"),
+                "results": results,
+            }
+            with output.open() as f:
+                json.dump(jso, f, indent=2, sort_keys=True)
+        case "tsv":
+            with output.open() as f:
+                delim = "\t"
+                field_names = ValidationResult.field_names(False)
+                # Can't use csv.DictWriter here because we may need to use `rich.print` to color status output.
+                rprint(delim.join(field_names), file=f)
+                for v in out:
+                    d = v.to_dict(False, output.is_a_tty())
+                    rprint(delim.join(d.get(n, "") for n in field_names), file=f)
+        case s:
+            raise RuntimeError(f"Unknown output format '{s}'")

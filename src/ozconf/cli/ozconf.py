@@ -8,6 +8,8 @@ from typing import Annotated, Literal
 
 import typer
 
+from ozconf.kinds.common import OutputConfig
+
 from ..case_filter import (
     CaseFilter,
     OzVersion,
@@ -20,16 +22,19 @@ from ..case_filter import (
 from ..kinds.parse_attributes import run_parse_attributes
 from ..types import Kind, parse_dingus_invocation
 from .common import (
+    STDIO_PATH,
     CustomCasesArg,
     ExcludeNameArgs,
     ExcludeProfileArgs,
     ExcludeValidityArgs,
+    FormatArg,
     IncludeNameArgs,
     IncludeProfileArgs,
     IncludeValidityArgs,
     InvokeDingusArgs,
     KindsArg,
     NoBuiltinArg,
+    PathOrStdOutputArg,
     VerbosityArg,
     VersionSpecifierArg,
     setup_logging,
@@ -153,6 +158,8 @@ def test(
     include_name: IncludeNameArgs = None,
     exclude_name: ExcludeNameArgs = None,
     verbosity: VerbosityArg = 0,
+    out_file: PathOrStdOutputArg = STDIO_PATH,
+    format: FormatArg = "tsv",
     dingus: InvokeDingusArgs = None,
 ):
     """Run tests."""
@@ -168,10 +175,16 @@ def test(
     )
     args = parse_dingus_invocation(dingus)
     if args is None:
-        print("No dingus given; nothing to do")
+        print("No dingus given; nothing to do", file=sys.stderr)
         return 0
 
-    asyncio.run(run_parse_attributes(args, filt))
+    if out_file == STDIO_PATH:
+        p = None
+    else:
+        p = out_file
+    out_cfg = OutputConfig(p, format)
+
+    asyncio.run(run_parse_attributes(args, filt, out_cfg))
 
 
 @app.command()

@@ -1,6 +1,6 @@
 import logging
 from pathlib import Path
-from typing import Annotated
+from typing import Annotated, Literal
 
 import typer
 
@@ -9,6 +9,7 @@ Query may be an exact substring;
 or a UNIX-style filename matcher if it has the special characters `*`, `?`, `[`, `]`;
 or a regular expression if it starts with `/`.
 """.rstrip()
+STDIO_PATH = Path("-")
 
 VerbosityArg = Annotated[
     int, typer.Option("--verbose", "-v", count=True, help="Increase logging verbosity.")
@@ -83,6 +84,22 @@ VersionSpecifierArg = Annotated[
         "--version-filter",
         "-e",
         help="Select tests for specific OME-Zarr versions with a PEP 440 version range specifier.",
+    ),
+]
+PathOrStdOutputArg = Annotated[
+    Path,
+    typer.Option(
+        "--out-file",
+        "-o",
+        help="Path to output file, or - for STDOUT.",
+    ),
+]
+FormatArg = Annotated[
+    Literal["tsv", "json"],
+    typer.Option(
+        "--format",
+        "-f",
+        help="Output format.",
     ),
 ]
 
