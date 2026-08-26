@@ -27,6 +27,17 @@ REPO_ROOT = Path(__file__).resolve().parent.parent
 PROFILE_MAP = {"spec": "core", "strict": "strict"}
 
 
+def normalize(data: dict) -> dict:
+    """Drop the `_conformance` key and any pre-release suffix e.g. rc0 used in the source fixtures."""
+    # handle both zarr.json and direct attribute test cases
+    container = data.get("attributes", data)
+    container.pop("_conformance", None)
+    if "ome" in container:
+        # this module only ever imports v0.6 cases, so we can hardcode the version here
+        container["ome"]["version"] = "0.6"
+    return data
+
+
 def copy_tree(src_root: Path, dest_root: Path, glob_pattern: str) -> int:
     count = 0
     for src_profile, dest_profile in PROFILE_MAP.items():
@@ -35,7 +46,7 @@ def copy_tree(src_root: Path, dest_root: Path, glob_pattern: str) -> int:
             rel = src_path.relative_to(profile_root)
             dest_path = dest_root / dest_profile / rel
 
-            data = json.loads(src_path.read_text())
+            data = normalize(json.loads(src_path.read_text()))
             dest_path.parent.mkdir(parents=True, exist_ok=True)
             dest_path.write_text(json.dumps(data, indent=2, sort_keys=True) + "\n")
             count += 1
