@@ -1,0 +1,16 @@
+{
+  "attributes": {
+    "well": {
+      "images": [
+        {
+          "path": "0"
+        },
+        {
+          "path": "0"
+        }
+      ]
+    }
+  },
+  "node_type": "group",
+  "zarr_format": 3
+}

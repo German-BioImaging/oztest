@@ -1,0 +1,26 @@
+{
+  "ome": {
+    "scene": {
+      "coordinateSystems": [
+        {
+          "axes": [
+            {
+              "discrete": false,
+              "name": "x",
+              "type": "space",
+              "unit": "micrometer"
+            },
+            {
+              "discrete": false,
+              "name": "y",
+              "type": "space",
+              "unit": "micrometer"
+            }
+          ],
+          "name": "world"
+        }
+      ]
+    },
+    "version": "0.6"
+  }
+}

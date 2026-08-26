@@ -1,0 +1,23 @@
+{
+  "ome": {
+    "plate": {
+      "columns": [
+        {
+          "name": "A"
+        }
+      ],
+      "rows": [
+        {
+          "name": "1"
+        }
+      ],
+      "wells": [
+        {
+          "path": "A1",
+          "rowIndex": 0
+        }
+      ]
+    },
+    "version": "0.6"
+  }
+}

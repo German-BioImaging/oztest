@@ -1,0 +1,26 @@
+{
+  "ome": {
+    "multiscales": [
+      {
+        "coordinateSystems": [
+          {
+            "axes": [
+              {
+                "name": "y",
+                "type": "space",
+                "unit": "micrometer"
+              },
+              {
+                "name": "x",
+                "type": "space",
+                "unit": "micrometer"
+              }
+            ],
+            "name": "intrinsic"
+          }
+        ]
+      }
+    ],
+    "version": "0.6"
+  }
+}

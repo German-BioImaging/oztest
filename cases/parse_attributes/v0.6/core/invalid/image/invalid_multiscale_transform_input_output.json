@@ -1,0 +1,42 @@
+{
+  "ome": {
+    "multiscales": [
+      {
+        "coordinateSystems": [
+          {
+            "axes": [
+              {
+                "name": "y",
+                "type": "space",
+                "unit": "micrometer"
+              },
+              {
+                "name": "x",
+                "type": "space",
+                "unit": "micrometer"
+              }
+            ],
+            "name": "intrinsic"
+          }
+        ],
+        "datasets": [
+          {
+            "coordinateTransformations": [
+              {
+                "input": "s0",
+                "output": "intrinsic",
+                "scale": [
+                  1,
+                  1
+                ],
+                "type": "scale"
+              }
+            ],
+            "path": "s0"
+          }
+        ]
+      }
+    ],
+    "version": "0.6"
+  }
+}

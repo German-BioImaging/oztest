@@ -1,0 +1,103 @@
+{
+  "ome": {
+    "multiscales": [
+      {
+        "coordinateSystems": [
+          {
+            "axes": [
+              {
+                "discrete": false,
+                "name": "y",
+                "type": "space",
+                "unit": "micrometer"
+              },
+              {
+                "discrete": false,
+                "name": "x",
+                "type": "space",
+                "unit": "micrometer"
+              }
+            ],
+            "name": "physical"
+          },
+          {
+            "axes": [
+              {
+                "discrete": true,
+                "name": "dim_0",
+                "type": "array"
+              },
+              {
+                "discrete": true,
+                "name": "dim_1",
+                "type": "array"
+              }
+            ],
+            "name": "array_coordinates"
+          }
+        ],
+        "coordinateTransformations": [
+          {
+            "input": {
+              "name": "array_coordinates"
+            },
+            "name": "transform-name",
+            "output": {
+              "name": "physical"
+            },
+            "transformations": [
+              {
+                "inputAxes": [
+                  0
+                ],
+                "outputAxes": [
+                  0
+                ],
+                "transformation": {
+                  "scale": [
+                    2
+                  ],
+                  "type": "scale"
+                }
+              },
+              {
+                "inputAxes": [
+                  1
+                ],
+                "outputAxes": [
+                  1
+                ],
+                "transformation": {
+                  "translation": [
+                    -10
+                  ],
+                  "type": "translation"
+                }
+              }
+            ],
+            "type": "byDimension"
+          }
+        ],
+        "datasets": [
+          {
+            "coordinateTransformations": [
+              {
+                "input": {
+                  "path": "s0"
+                },
+                "name": "transform-name",
+                "output": {
+                  "name": "array_coordinates"
+                },
+                "type": "identity"
+              }
+            ],
+            "path": "s0"
+          }
+        ],
+        "name": "multiscales"
+      }
+    ],
+    "version": "0.6"
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "attributes": {
+    "ome": {
+      "multiscales": [
+        {
+          "coordinateSystems": [
+            {
+              "axes": [
+                {
+                  "name": "t",
+                  "type": "time",
+                  "unit": "micrometer"
+                },
+                {
+                  "name": "y",
+                  "type": "space",
+                  "unit": "micrometer"
+                },
+                {
+                  "name": "x",
+                  "type": "space",
+                  "unit": "micrometer"
+                }
+              ],
+              "name": "intrinsic"
+            }
+          ],
+          "datasets": [
+            {
+              "coordinateTransformations": [
+                {
+                  "input": "0",
+                  "output": "intrinsic",
+                  "scale": [
+                    0.13,
+                    0.13
+                  ],
+                  "type": "scale"
+                }
+              ],
+              "path": "0"
+            }
+          ]
+        }
+      ],
+      "version": "0.6"
+    }
+  },
+  "node_type": "group",
+  "zarr_format": 3
+}

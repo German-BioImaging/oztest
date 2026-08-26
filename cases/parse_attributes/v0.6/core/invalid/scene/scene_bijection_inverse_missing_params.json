@@ -1,0 +1,53 @@
+{
+  "ome": {
+    "scene": {
+      "coordinateSystems": [
+        {
+          "axes": [
+            {
+              "discrete": false,
+              "name": "x",
+              "type": "space",
+              "unit": "micrometer"
+            },
+            {
+              "discrete": false,
+              "name": "y",
+              "type": "space",
+              "unit": "micrometer"
+            }
+          ],
+          "name": "one"
+        },
+        {
+          "axes": [
+            {
+              "discrete": false,
+              "name": "x",
+              "type": "space",
+              "unit": "micrometer"
+            },
+            {
+              "discrete": false,
+              "name": "y",
+              "type": "space",
+              "unit": "micrometer"
+            }
+          ],
+          "name": "two"
+        }
+      ],
+      "coordinateTransformations": [
+        {
+          "input": "one",
+          "inverse": {
+            "type": "scale"
+          },
+          "output": "two",
+          "type": "bijection"
+        }
+      ]
+    },
+    "version": "0.6"
+  }
+}

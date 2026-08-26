@@ -1,0 +1,21 @@
+{
+  "attributes": {
+    "ome": {
+      "image-label": {
+        "colors": [
+          {
+            "rgba": [
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ]
+      },
+      "version": "0.6"
+    }
+  },
+  "node_type": "group",
+  "zarr_format": 3
+}

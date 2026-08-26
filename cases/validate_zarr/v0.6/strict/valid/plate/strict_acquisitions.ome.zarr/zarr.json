@@ -1,0 +1,36 @@
+{
+  "attributes": {
+    "ome": {
+      "plate": {
+        "acquisitions": [
+          {
+            "id": 0,
+            "maximumfieldcount": 1,
+            "name": "0"
+          }
+        ],
+        "columns": [
+          {
+            "name": "A"
+          }
+        ],
+        "name": "test plate",
+        "rows": [
+          {
+            "name": "1"
+          }
+        ],
+        "wells": [
+          {
+            "columnIndex": 0,
+            "path": "A/1",
+            "rowIndex": 0
+          }
+        ]
+      },
+      "version": "0.6"
+    }
+  },
+  "node_type": "group",
+  "zarr_format": 3
+}

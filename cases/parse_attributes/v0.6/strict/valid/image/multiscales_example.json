@@ -1,0 +1,163 @@
+{
+  "ome": {
+    "multiscales": [
+      {
+        "coordinateSystems": [
+          {
+            "axes": [
+              {
+                "name": "t",
+                "type": "time",
+                "unit": "millisecond"
+              },
+              {
+                "name": "c",
+                "type": "channel"
+              },
+              {
+                "name": "z",
+                "type": "space",
+                "unit": "micrometer"
+              },
+              {
+                "name": "y",
+                "type": "space",
+                "unit": "micrometer"
+              },
+              {
+                "name": "x",
+                "type": "space",
+                "unit": "micrometer"
+              }
+            ],
+            "name": "world"
+          },
+          {
+            "axes": [
+              {
+                "name": "t",
+                "type": "time",
+                "unit": "millisecond"
+              },
+              {
+                "name": "c",
+                "type": "channel"
+              },
+              {
+                "name": "z",
+                "type": "space",
+                "unit": "micrometer"
+              },
+              {
+                "name": "y",
+                "type": "space",
+                "unit": "micrometer"
+              },
+              {
+                "name": "x",
+                "type": "space",
+                "unit": "micrometer"
+              }
+            ],
+            "name": "intrinsic"
+          }
+        ],
+        "coordinateTransformations": [
+          {
+            "input": {
+              "name": "world"
+            },
+            "output": {
+              "name": "intrinsic"
+            },
+            "scale": [
+              0.1,
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "type": "scale"
+          }
+        ],
+        "datasets": [
+          {
+            "coordinateTransformations": [
+              {
+                "input": {
+                  "path": "s0"
+                },
+                "output": {
+                  "name": "intrinsic"
+                },
+                "scale": [
+                  1.0,
+                  1.0,
+                  0.5,
+                  0.5,
+                  0.5
+                ],
+                "type": "scale"
+              }
+            ],
+            "path": "s0"
+          },
+          {
+            "coordinateTransformations": [
+              {
+                "input": {
+                  "path": "s1"
+                },
+                "output": {
+                  "name": "intrinsic"
+                },
+                "scale": [
+                  1.0,
+                  1.0,
+                  1.0,
+                  1.0,
+                  1.0
+                ],
+                "type": "scale"
+              }
+            ],
+            "path": "1"
+          },
+          {
+            "coordinateTransformations": [
+              {
+                "input": {
+                  "path": "s2"
+                },
+                "output": {
+                  "name": "intrinsic"
+                },
+                "scale": [
+                  1.0,
+                  1.0,
+                  2.0,
+                  2.0,
+                  2.0
+                ],
+                "type": "scale"
+              }
+            ],
+            "path": "s2"
+          }
+        ],
+        "metadata": {
+          "args": "[true]",
+          "description": "the fields in metadata depend on the downscaling implementation. Here, the parameters passed to the skimage function are given",
+          "kwargs": {
+            "multichannel": true
+          },
+          "method": "skimage.transform.pyramid_gaussian",
+          "version": "0.16.1"
+        },
+        "name": "example",
+        "type": "gaussian"
+      }
+    ],
+    "version": "0.6"
+  }
+}
