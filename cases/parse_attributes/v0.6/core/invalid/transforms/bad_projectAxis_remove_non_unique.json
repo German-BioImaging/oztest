@@ -1,11 +1,4 @@
 {
-  "_conformance": {
-    "description": "Tests for a JSON document with a projectAxis transformation",
-    "schema": {
-      "id": "schemas/image.schema"
-    },
-    "valid": false
-  },
   "ome": {
     "multiscales": [
       {
@@ -170,6 +163,6 @@
         "name": "multiscales"
       }
     ],
-    "version": "0.6rc0"
+    "version": "0.6"
   }
 }

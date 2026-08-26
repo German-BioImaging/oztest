@@ -1,10 +1,4 @@
 {
-  "_conformance": {
-    "schema": {
-      "id": "schemas/strict_image.schema"
-    },
-    "strict": true
-  },
   "ome": {
     "multiscales": [
       {
@@ -52,6 +46,6 @@
         "type": "foo"
       }
     ],
-    "version": "0.6rc0"
+    "version": "0.6"
   }
 }

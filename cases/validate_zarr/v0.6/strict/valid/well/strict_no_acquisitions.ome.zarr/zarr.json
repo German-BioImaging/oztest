@@ -1,13 +1,7 @@
 {
   "attributes": {
-    "_conformance": {
-      "description": "Tests for the strict well JSON schema: ",
-      "schema": {
-        "id": "schemas/strict_well.schema"
-      }
-    },
     "ome": {
-      "version": "0.6rc0",
+      "version": "0.6",
       "well": {
         "images": [
           {

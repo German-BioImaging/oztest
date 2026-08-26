@@ -1,10 +1,4 @@
 {
-  "_conformance": {
-    "description": "Tests for the image JSON schema: byDimension transformation",
-    "schema": {
-      "id": "schemas/image.schema"
-    }
-  },
   "ome": {
     "multiscales": [
       {
@@ -104,6 +98,6 @@
         "name": "multiscales"
       }
     ],
-    "version": "0.6rc0"
+    "version": "0.6"
   }
 }

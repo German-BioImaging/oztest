@@ -1,9 +1,4 @@
 {
-  "_conformance": {
-    "schema": {
-      "id": "schemas/image.schema"
-    }
-  },
   "ome": {
     "multiscales": [
       {
@@ -70,6 +65,6 @@
         "name": "multiscales"
       }
     ],
-    "version": "0.6rc0"
+    "version": "0.6"
   }
 }

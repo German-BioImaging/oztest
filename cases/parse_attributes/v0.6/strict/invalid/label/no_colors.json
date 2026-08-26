@@ -1,14 +1,6 @@
 {
-  "_conformance": {
-    "description": "Tests for the strict image-label JSON schema: ",
-    "schema": {
-      "id": "schemas/strict_label.schema"
-    },
-    "strict": true,
-    "valid": false
-  },
   "ome": {
     "image-label": {},
-    "version": "0.6rc0"
+    "version": "0.6"
   }
 }

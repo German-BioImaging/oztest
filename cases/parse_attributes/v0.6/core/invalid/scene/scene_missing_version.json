@@ -1,11 +1,4 @@
 {
-  "_conformance": {
-    "description": "Tests for the scene JSON schema: ",
-    "schema": {
-      "id": "schemas/scene.schema"
-    },
-    "valid": false
-  },
   "ome": {
     "coordinateSystems": [
       {
@@ -25,6 +18,7 @@
         ],
         "name": "world"
       }
-    ]
+    ],
+    "version": "0.6"
   }
 }

@@ -1,11 +1,4 @@
 {
-  "_conformance": {
-    "description": "Tests for a JSON document with a mapAxis transformation",
-    "schema": {
-      "id": "schemas/image.schema"
-    },
-    "valid": true
-  },
   "ome": {
     "multiscales": [
       {
@@ -159,6 +152,6 @@
         "name": "multiscales"
       }
     ],
-    "version": "0.6rc0"
+    "version": "0.6"
   }
 }

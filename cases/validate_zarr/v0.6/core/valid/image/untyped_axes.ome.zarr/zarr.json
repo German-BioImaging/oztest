@@ -1,10 +1,5 @@
 {
   "attributes": {
-    "_conformance": {
-      "schema": {
-        "id": "schemas/image.schema"
-      }
-    },
     "ome": {
       "multiscales": [
         {
@@ -47,7 +42,7 @@
           ]
         }
       ],
-      "version": "0.6rc0"
+      "version": "0.6"
     }
   },
   "node_type": "group",

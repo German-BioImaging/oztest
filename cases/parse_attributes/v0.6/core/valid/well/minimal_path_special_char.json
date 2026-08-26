@@ -1,12 +1,6 @@
 {
-  "_conformance": {
-    "description": "Tests for the well JSON schema: ",
-    "schema": {
-      "id": "schemas/well.schema"
-    }
-  },
   "ome": {
-    "version": "0.6rc0",
+    "version": "0.6",
     "well": {
       "images": [
         {
