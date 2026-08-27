@@ -39,11 +39,15 @@
       ],
       "coordinateTransformations": [
         {
-          "input": "one",
+          "input": {
+            "name": "one"
+          },
           "inverse": {
             "type": "scale"
           },
-          "output": "two",
+          "output": {
+            "name": "two"
+          },
           "type": "bijection"
         }
       ]

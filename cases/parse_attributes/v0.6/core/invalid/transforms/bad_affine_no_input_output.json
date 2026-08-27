@@ -42,9 +42,13 @@
           {
             "coordinateTransformations": [
               {
-                "input": "array",
+                "input": {
+                  "path": "array"
+                },
                 "name": "transform-name",
-                "output": "physical",
+                "output": {
+                  "name": "physical"
+                },
                 "type": "identity"
               }
             ],

@@ -65,8 +65,12 @@
           ],
           "coordinateTransformations": [
             {
-              "input": "world",
-              "output": "intrinsic",
+              "input": {
+                "name": "world"
+              },
+              "output": {
+                "name": "intrinsic"
+              },
               "scale": [
                 0.1,
                 1.0,
@@ -81,8 +85,12 @@
             {
               "coordinateTransformations": [
                 {
-                  "input": "0",
-                  "output": "intrinsic",
+                  "input": {
+                    "path": "0"
+                  },
+                  "output": {
+                    "name": "intrinsic"
+                  },
                   "scale": [
                     1.0,
                     1.0,
@@ -98,8 +106,12 @@
             {
               "coordinateTransformations": [
                 {
-                  "input": "1",
-                  "output": "intrinsic",
+                  "input": {
+                    "path": "1"
+                  },
+                  "output": {
+                    "name": "intrinsic"
+                  },
                   "scale": [
                     1.0,
                     1.0,
@@ -115,8 +127,12 @@
             {
               "coordinateTransformations": [
                 {
-                  "input": "2",
-                  "output": "intrinsic",
+                  "input": {
+                    "path": "2"
+                  },
+                  "output": {
+                    "name": "intrinsic"
+                  },
                   "scale": [
                     1.0,
                     1.0,

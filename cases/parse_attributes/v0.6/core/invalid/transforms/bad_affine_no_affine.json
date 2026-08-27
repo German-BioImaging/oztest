@@ -23,8 +23,12 @@
         ],
         "coordinateTransformations": [
           {
-            "input": "array",
-            "output": "physical",
+            "input": {
+              "path": "array"
+            },
+            "output": {
+              "name": "physical"
+            },
             "type": "affine"
           }
         ],
@@ -32,9 +36,13 @@
           {
             "coordinateTransformations": [
               {
-                "input": "array",
+                "input": {
+                  "path": "array"
+                },
                 "name": "transform-name",
-                "output": "physical",
+                "output": {
+                  "name": "physical"
+                },
                 "type": "identity"
               }
             ],

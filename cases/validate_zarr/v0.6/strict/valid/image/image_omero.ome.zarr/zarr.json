@@ -63,8 +63,12 @@
           ],
           "coordinateTransformations": [
             {
-              "input": "intrinsic",
-              "output": "world",
+              "input": {
+                "path": "intrinsic"
+              },
+              "output": {
+                "name": "world"
+              },
               "translation": [
                 0,
                 9,
@@ -79,8 +83,12 @@
             {
               "coordinateTransformations": [
                 {
-                  "input": "0",
-                  "output": "physical",
+                  "input": {
+                    "path": "0"
+                  },
+                  "output": {
+                    "name": "physical"
+                  },
                   "scale": [
                     1,
                     1,
@@ -96,8 +104,12 @@
             {
               "coordinateTransformations": [
                 {
-                  "input": "1",
-                  "output": "physical",
+                  "input": {
+                    "path": "1"
+                  },
+                  "output": {
+                    "name": "physical"
+                  },
                   "scale": [
                     1,
                     1,
