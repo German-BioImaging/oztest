@@ -8,7 +8,7 @@ from typing import Annotated, Literal
 
 import typer
 
-from ozconf.kinds.common import OutputConfig
+from oztest.kinds.common import OutputConfig
 
 from ..case_filter import (
     CaseFilter,

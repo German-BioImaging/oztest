@@ -149,7 +149,7 @@ async def run_parse_attributes(
             results = [v.to_dict(True, False) for v in out]
             jso = {
                 "command": dingus,
-                "ozconf_version": version("ozconf"),
+                "oztest_version": version("oztest"),
                 "results": results,
             }
             with output.open() as f:
