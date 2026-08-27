@@ -146,7 +146,7 @@ def find(
 
 
 @app.command()
-def test(
+def run(
     kind: Kind,
     custom_cases: CustomCasesArg = None,
     no_builtin: NoBuiltinArg = False,
