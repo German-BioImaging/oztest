@@ -87,6 +87,16 @@ These cases test the numerical accuracy of coordinate transformations (introduce
 
 See [cases/transform_coordinates/README.md](./cases/transform_coordinates/README.md) for more details.
 
+## Test case provenance
+
+`parse_attributes/v0.4` and `parse_attributes/v0.5` test cases were imported from their submodules in the `ngff`
+repo in [PR #5](https://github.com/clbarnes/ozconf/pull/5). The script used for this import is under `scripts/import_v04_v05_attributes.py`.
+
+`parse_attributes/v0.6` and `validate_zarr/v0.6` test cases were imported in [PR #13](https://github.com/clbarnes/ozconf/pull/13)
+from the `ngff-spec` repo at commit [5c76733](https://github.com/ome/ngff-spec/commit/5c76733fe3a1f97a3957909c879b15d57689f74e).
+The script used for this import is under `scripts/import_v06_cases.py`.
+
+
 ## Versioning
 
 This repository uses [calendar versioning](https://calver.org/)
