@@ -6,7 +6,7 @@
           {
             "name": "t",
             "type": "time",
-            "unit": "micrometer"
+            "unit": "second"
           },
           {
             "name": "y",

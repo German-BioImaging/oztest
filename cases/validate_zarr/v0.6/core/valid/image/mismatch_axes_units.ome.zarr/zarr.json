@@ -9,7 +9,7 @@
                 {
                   "name": "t",
                   "type": "time",
-                  "unit": "micrometer"
+                  "unit": "second"
                 },
                 {
                   "name": "y",
@@ -32,6 +32,7 @@
                   "input": "0",
                   "output": "intrinsic",
                   "scale": [
+                    1.0,
                     0.13,
                     0.13
                   ],
