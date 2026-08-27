@@ -1,0 +1,26 @@
+{
+  "plate": {
+    "acquisitions": [
+      {
+        "id": 0
+      }
+    ],
+    "columns": [
+      {
+        "name": "1"
+      }
+    ],
+    "rows": [
+      {
+        "name": "A"
+      }
+    ],
+    "wells": [
+      {
+        "columnIndex": 0,
+        "path": "1/A",
+        "rowIndex": 0
+      }
+    ]
+  }
+}
