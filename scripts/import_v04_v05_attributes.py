@@ -4,7 +4,7 @@
 # dependencies = []
 # ///
 """Import v0.4/v0.5 parse_attributes cases from the `ngff` repo's 0.4/0.5
-submodule suite JSON files into ozconf's per-file case layout.
+submodule suite JSON files into oztest's per-file case layout.
 
 Source: <ngff-repo>/specifications/{0.4,0.5}/tests/*_suite.json
 Dest:   cases/parse_attributes/v{0.4,0.5}/{core,strict}/{valid,invalid}/{kind}/<name>.json

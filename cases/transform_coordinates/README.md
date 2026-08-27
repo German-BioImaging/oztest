@@ -47,14 +47,14 @@ raising an error if any of these steps are not possible.
 
 ## Dingus signature
 
-Implementors may use the `ozconf` tool in combination with their own dingus CLI to manage running the tests.
+Implementors may use the `oztest` tool in combination with their own dingus CLI to manage running the tests.
 
-The call to the dingus, including any prefix arguments, should be added to the end of an invocation of `ozconf transform-coordinates`.
-`ozconf` will then supply 4 additional positional arguments.
+The call to the dingus, including any prefix arguments, should be added to the end of an invocation of `oztest transform-coordinates`.
+`oztest` will then supply 4 additional positional arguments.
 
 ```sh
 #!/bin/sh
-ozconf transform_coordinates -- myDingus -somearg --another=arg something somethingelse
+oztest transform_coordinates -- myDingus -somearg --another=arg something somethingelse
 ```
 
 The last 4 positional arguments of the dingus MUST be:

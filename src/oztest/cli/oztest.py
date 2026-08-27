@@ -8,7 +8,7 @@ from typing import Annotated, Literal
 
 import typer
 
-from ozconf.kinds.common import OutputConfig
+from oztest.kinds.common import OutputConfig
 
 from ..case_filter import (
     CaseFilter,
@@ -146,7 +146,7 @@ def find(
 
 
 @app.command()
-def test(
+def run(
     kind: Kind,
     custom_cases: CustomCasesArg = None,
     no_builtin: NoBuiltinArg = False,
@@ -209,12 +209,10 @@ def dingus(
     args: InvokeDingusArgs,
     stdout: Annotated[
         str | None,
-        int,
         typer.Option("--stdout", "-o", help="Print message to standard output."),
     ] = None,
     stderr: Annotated[
         str | None,
-        int,
         typer.Option("--stderr", "-e", help="Print message to standard error."),
     ] = None,
     verbosity: VerbosityArg = 0,
