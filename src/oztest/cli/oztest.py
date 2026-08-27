@@ -209,12 +209,10 @@ def dingus(
     args: InvokeDingusArgs,
     stdout: Annotated[
         str | None,
-        int,
         typer.Option("--stdout", "-o", help="Print message to standard output."),
     ] = None,
     stderr: Annotated[
         str | None,
-        int,
         typer.Option("--stderr", "-e", help="Print message to standard error."),
     ] = None,
     verbosity: VerbosityArg = 0,
