@@ -63,7 +63,7 @@
         "coordinateTransformations": [
           {
             "input": {
-              "name": "intrinsic"
+              "name": "physical"
             },
             "output": {
               "name": "world"

@@ -64,7 +64,7 @@
           "coordinateTransformations": [
             {
               "input": {
-                "path": "intrinsic"
+                "path": "physical"
               },
               "output": {
                 "name": "world"
