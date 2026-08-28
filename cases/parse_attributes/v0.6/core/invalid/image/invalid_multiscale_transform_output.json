@@ -27,7 +27,7 @@
                   "path": "s0"
                 },
                 "output": {
-                  "path": "intrinsic"
+                  "name": "intrinsic"
                 },
                 "scale": [
                   1,

@@ -40,13 +40,17 @@
         ],
         "coordinateTransformations": [
           {
-            "input": "physical",
+            "input": {
+              "name": "physical"
+            },
             "mapAxis": [
               0,
               0
             ],
             "name": "map-transform",
-            "output": "output",
+            "output": {
+              "name": "output"
+            },
             "type": "mapAxis"
           }
         ],
@@ -54,9 +58,13 @@
           {
             "coordinateTransformations": [
               {
-                "input": "array",
+                "input": {
+                  "path": "array"
+                },
                 "name": "transform-name",
-                "output": "physical",
+                "output": {
+                  "name": "physical"
+                },
                 "type": "identity"
               }
             ],

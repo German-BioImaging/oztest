@@ -24,8 +24,12 @@
             {
               "coordinateTransformations": [
                 {
-                  "input": "0",
-                  "output": "intrinsic",
+                  "input": {
+                    "path": "0"
+                  },
+                  "output": {
+                    "name": "intrinsic"
+                  },
                   "scale": [
                     1,
                     1

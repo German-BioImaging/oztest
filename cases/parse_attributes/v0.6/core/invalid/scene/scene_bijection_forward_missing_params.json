@@ -42,8 +42,12 @@
           "forward": {
             "type": "scale"
           },
-          "input": "one",
-          "output": "two",
+          "input": {
+            "name": "one"
+          },
+          "output": {
+            "name": "two"
+          },
           "type": "bijection"
         }
       ]

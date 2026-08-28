@@ -40,9 +40,13 @@
         ],
         "coordinateTransformations": [
           {
-            "input": "physical",
+            "input": {
+              "name": "physical"
+            },
             "name": "transform-name",
-            "output": "output",
+            "output": {
+              "name": "output"
+            },
             "transformations": [
               {
                 "inputAxes": [
@@ -76,9 +80,13 @@
           {
             "coordinateTransformations": [
               {
-                "input": "array",
+                "input": {
+                  "path": "array"
+                },
                 "name": "transform-name",
-                "output": "physical",
+                "output": {
+                  "name": "physical"
+                },
                 "type": "identity"
               }
             ],

@@ -27,8 +27,12 @@
             {
               "coordinateTransformations": [
                 {
-                  "input": "path/to/0",
-                  "output": "physical",
+                  "input": {
+                    "path": "path/to/0"
+                  },
+                  "output": {
+                    "name": "physical"
+                  },
                   "scale": [
                     1,
                     1
