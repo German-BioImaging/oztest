@@ -28,7 +28,7 @@
                     "path": "0"
                   },
                   "output": {
-                    "path": "intrinsice"
+                    "name": "intrinsic"
                   },
                   "translation": [
                     1,
