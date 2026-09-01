@@ -171,6 +171,7 @@ class Args:
         )
         g.add_argument(
             "--fill-value",
+            "-F",
             type=jso,
             help="JSON string representing fill value to be used; not type-checked",
         )
