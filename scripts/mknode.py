@@ -78,6 +78,10 @@ class ArrayArgs:
         if attributes is None:
             attributes = {}
 
+        a2b: JSONObject = {"name": "bytes"}
+        if self.data_type not in ("bool", "int8", "uint8"):
+            a2b["configuration"] = {"endian": "little"}
+
         d = {
             "zarr_format": 3,
             "node_type": "array",
@@ -87,9 +91,9 @@ class ArrayArgs:
                 "name": "regular",
                 "configuration": {"chunk_shape": self.shape},
             },
-            "chunk_key_encoding": "default",
+            "chunk_key_encoding": {"name": "default"},
             "fill_value": self.fill_value,
-            "codecs": [{"name": "bytes", "configuration": {"endian": "little"}}],
+            "codecs": [a2b],
             "attributes": attributes,
         }
         return d
