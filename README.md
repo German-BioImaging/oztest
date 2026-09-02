@@ -1,5 +1,7 @@
 # OME-Zarr conformance tests
 
+> ⚠️ This project is a work in progress. The test suites are expected to grow and almost certainly need further correction. ⚠️
+
 This repository provides test cases and testing tools for OME-Zarr implementations.
 
 The cases themselves are organised by type in the `cases/` directory.
@@ -98,11 +100,12 @@ The script used for this import is under `scripts/import_v06_cases.py`.
 
 ## Versioning
 
-This repository uses [calendar versioning](https://calver.org/)
+This project is currently in alpha (`0.x` series).
+The project version does not correspond to OME-Zarr versions: see the [changelog](./CHANGELOG.md) for details on support for different OME-Zarr versions.
+
+Once released, this repository will use [calendar versioning](https://calver.org/) with format `<YYYY>.<MM>.<minor>`
 under the [python package version scheme](https://packaging.python.org/en/latest/specifications/version-specifiers/#version-scheme)
 originally proposed in [PEP 440](https://peps.python.org/pep-0440/).
-
-See the [changelog](./CHANGELOG.md) for details on support for different OME-Zarr versions.
 
 ## Contributing
 
