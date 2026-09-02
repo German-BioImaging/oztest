@@ -1,0 +1,30 @@
+{
+  "attributes": {},
+  "chunk_grid": {
+    "configuration": {
+      "chunk_shape": [
+        10,
+        10,
+        10
+      ]
+    },
+    "name": "regular"
+  },
+  "chunk_key_encoding": {
+    "name": "default"
+  },
+  "codecs": [
+    {
+      "name": "bytes"
+    }
+  ],
+  "data_type": "uint8",
+  "fill_value": 0,
+  "node_type": "array",
+  "shape": [
+    10,
+    10,
+    10
+  ],
+  "zarr_format": 3
+}
