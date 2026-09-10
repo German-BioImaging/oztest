@@ -31,15 +31,16 @@ def test_attributes_are_json(case: Case):
 
 @parametrize_cases(
     CaseFilter.from_args(
-        kinds=["validate_zarr", "transform_coordinates"], version_spec=">=0.5"
+        kinds=["validate_zarr", "transform_coordinates"], version_spec=">=0.4"
     )
 )
 def test_zarr_tests_are_zarr(case: Case):
-    zarrista = pytest.importorskip("zarrista")
+    pytest.importorskip("zarr")
+    import zarr
+
     with case.as_path() as p:
-        assert p.is_dir()
-        store = zarrista.store.FilesystemStore(p)
-        root = zarrista.Group.open(store)
-        # not sure whether this will error for malformed nodes,
-        # or just skip
-        _ = root.traverse()
+        root = zarr.open(p, mode="r")
+
+        if isinstance(root, zarr.Group):
+            for _ in root.members(None):
+                pass
