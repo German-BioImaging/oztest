@@ -30,9 +30,7 @@ def test_attributes_are_json(case: Case):
 
 
 @parametrize_cases(
-    CaseFilter.from_args(
-        kinds=["validate_zarr", "transform_coordinates"], version_spec=">=0.4"
-    )
+    CaseFilter.from_args(kinds=["validate_zarr", "transform_coordinates"])
 )
 def test_zarr_tests_are_zarr(case: Case):
     pytest.importorskip("zarr")
