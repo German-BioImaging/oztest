@@ -1,26 +1,21 @@
 import json
-from typing import Any
 
 import pytest
 
 from oztest.case_filter import Case, CaseFilter
 
 
-def _cases_as_parametrize_kwargs(
-    filt: CaseFilter,
-) -> tuple[tuple[str, ...], list[tuple], dict[str, Any]]:
+def parametrize_cases(filt: CaseFilter):
     cases = sorted(c for c, _ in filt)
     argnames = ("case",)
-    argvalues = [(c,) for c in cases]
-    kwargs = {"ids": [c.slug() for c in cases]}
-    return (argnames, argvalues, kwargs)
-
-
-def parametrize_cases(filt: CaseFilter):
-    argnames, argvalues, kwargs = _cases_as_parametrize_kwargs(filt)
+    argvalues: list[tuple[Case]] = []
+    ids: list[str] = []
+    for c in cases:
+        argvalues.append((c,))
+        ids.append(c.slug())
 
     def decorator(test_fn):
-        return pytest.mark.parametrize(argnames, argvalues, **kwargs)(test_fn)
+        return pytest.mark.parametrize(argnames, argvalues, ids=ids)(test_fn)
 
     return decorator
 
