@@ -1,4 +1,8 @@
-#!/usr/bin/env python3
+#!/usr/bin/env -S uv run --script
+# /// script
+# requires-python = ">= 3.12"
+# dependencies = ["zarr >= 3.3.0"]
+# ///
 """Script to create a new zarr node."""
 
 from __future__ import annotations
@@ -14,14 +18,16 @@ from pathlib import Path
 from shutil import rmtree
 from typing import TypeVar
 
+import zarr
+from zarr.core.common import JSON, ZarrFormat
+
 logger = logging.getLogger("mknode")
 
 T = TypeVar("T")
 
 ROOT_DIR_EXT = ".zarr"
 
-JSON = float | int | str | None | bool | list["JSON"] | dict[str, "JSON"]
-JSONObject = dict[str, "JSON"]
+JSONObject = dict[str, JSON]
 METADATA_FILE = "zarr.json"
 DATA_TYPES = ["bool"]
 for base in ("int", "uint"):
@@ -104,25 +110,30 @@ class ArrayArgs:
 @dataclass
 class Args:
     path: Path
-    store: Path | None
+    store: Path
     attributes: JSONObject
     force: bool
     parents: bool
     log_level: int
+    zarr_version: ZarrFormat
     array_args: ArrayArgs | None
 
     def __post_init__(self):
-        if (
-            self.store is not None
-            and self.store != self.path
-            and self.store not in self.path.parents
-        ):
+        if self.store != self.path and self.store not in self.path.parents:
             raise ValueError("store must be an ancestor of path")
 
     @classmethod
     def parse(cls, raw_args: list[str] | None = None):
         parser = ArgumentParser(description=__doc__)
         parser.add_argument("path", type=Path, help="file system path to new node")
+        parser.add_argument(
+            "--zarr-version",
+            "-z",
+            choices=[2, 3],
+            type=int,
+            default=3,
+            help="Zarr version to write; default 3",
+        )
         parser.add_argument(
             "--store",
             "-s",
@@ -192,8 +203,16 @@ class Args:
             else:
                 for p in nodepath.parents:
                     if p.name.endswith(ROOT_DIR_EXT):
+                        logger.info("Inferring %s as store root", p)
                         storepath = p
                         break
+
+        if storepath is None:
+            logger.warning(
+                "No --store given, and could not infer from %s extension; node path will be used as store root, but should be renamed",
+                ROOT_DIR_EXT,
+            )
+            storepath = nodepath
 
         return cls(
             nodepath,
@@ -202,6 +221,7 @@ class Args:
             parsed.force,
             parsed.parents,
             level,
+            parsed.zarr_version,
             maybe_array,
         )
 
@@ -235,12 +255,14 @@ def main():
     args = Args.parse()
     logging.basicConfig(level=args.log_level)
 
-    if args.store is not None:
-        if not args.store.name.endswith(ROOT_DIR_EXT):
-            logger.warning("Store path should end with %s", ROOT_DIR_EXT)
-
-        if args.store != args.path:
-            args.store.mkdir(exist_ok=True, parents=args.parents)
+    if args.store != args.path:
+        args.store.parent.mkdir(exist_ok=True, parents=args.parents)
+        grp = zarr.open_group(args.store, zarr_format=args.zarr_version)
+        for name in args.path.relative_to(args.store).parts[:-1]:
+            if args.parents:
+                grp = grp.require_group(name)
+            else:
+                grp = grp.get_group(name)
 
     nodepath = args.path
     if nodepath.exists():
@@ -251,27 +273,21 @@ def main():
             eprint(f"Node already exists at {nodepath} ; use --force to overwrite")
             return 1
 
-    nodepath.mkdir(parents=args.parents)
-
     if args.array_args is None:
-        write_group_metadata(nodepath, args.attributes)
-    else:
-        meta = args.array_args.get_metadata(args.attributes)
-        write_node_metadata(nodepath, meta)
-
-    if not args.parents:
-        return 0
-
-    if args.store is None:
-        logger.warning(
-            "No --store given, and could not infer from %s extension; parent group metadata will not be written",
-            ROOT_DIR_EXT,
+        zarr.create_group(
+            args.path, zarr_format=args.zarr_version, attributes=args.attributes
         )
     else:
-        while nodepath != args.store:
-            nodepath = nodepath.parent
-            if not nodepath.joinpath(METADATA_FILE).exists():
-                write_group_metadata(nodepath)
+        aargs = args.array_args
+        zarr.create_array(
+            args.path,
+            shape=aargs.shape,
+            dtype=aargs.data_type,
+            chunks=aargs.chunk_shape,
+            fill_value=aargs.fill_value,
+            attributes=args.attributes,
+        )
+
     return 0
 
 
