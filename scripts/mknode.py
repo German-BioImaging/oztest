@@ -18,6 +18,8 @@ logger = logging.getLogger("mknode")
 
 T = TypeVar("T")
 
+ROOT_DIR_EXT = ".zarr"
+
 JSON = float | int | str | None | bool | list["JSON"] | dict[str, "JSON"]
 JSONObject = dict[str, "JSON"]
 METADATA_FILE = "zarr.json"
@@ -125,7 +127,7 @@ class Args:
             "--store",
             "-s",
             type=Path,
-            help="file system path to store root, which must be an ancestor of the `path` argument; if not given, defaults to the nearest ancestor with the extension .ome.zarr",
+            help=f"file system path to store root, which must be an ancestor of the `path` argument; if not given, defaults to the nearest ancestor with the extension {ROOT_DIR_EXT}",
         )
         parser.add_argument(
             "-a",
@@ -173,7 +175,7 @@ class Args:
             "--fill-value",
             "-F",
             type=jso,
-            help="JSON string representing fill value to be used; not type-checked",
+            help="fill value to be used as JSON; not type-checked",
         )
         parsed = parser.parse_args(raw_args)
         maybe_array = ArrayArgs.maybe_from_args(
@@ -185,11 +187,11 @@ class Args:
         storepath: Path | None = parsed.store
         nodepath: Path = parsed.path
         if storepath is None:
-            if nodepath.name.endswith(".ome.zarr"):
+            if nodepath.name.endswith(ROOT_DIR_EXT):
                 storepath = nodepath
             else:
                 for p in nodepath.parents:
-                    if p.name.endswith(".ome.zarr"):
+                    if p.name.endswith(ROOT_DIR_EXT):
                         storepath = p
                         break
 
@@ -234,8 +236,8 @@ def main():
     logging.basicConfig(level=args.log_level)
 
     if args.store is not None:
-        if not args.store.name.endswith(".ome.zarr"):
-            logger.warning("Store path should end with .ome.zarr")
+        if not args.store.name.endswith(ROOT_DIR_EXT):
+            logger.warning("Store path should end with %s", ROOT_DIR_EXT)
 
         if args.store != args.path:
             args.store.mkdir(exist_ok=True, parents=args.parents)
@@ -248,16 +250,22 @@ def main():
         else:
             eprint(f"Node already exists at {nodepath} ; use --force to overwrite")
             return 1
+
     nodepath.mkdir(parents=args.parents)
+
     if args.array_args is None:
         write_group_metadata(nodepath, args.attributes)
     else:
         meta = args.array_args.get_metadata(args.attributes)
         write_node_metadata(nodepath, meta)
 
+    if not args.parents:
+        return 0
+
     if args.store is None:
         logger.warning(
-            "No --store given, and could not infer from .ome.zarr extension; parent group metadata will not be written"
+            "No --store given, and could not infer from %s extension; parent group metadata will not be written",
+            ROOT_DIR_EXT,
         )
     else:
         while nodepath != args.store:
