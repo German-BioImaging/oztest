@@ -24,11 +24,11 @@ from zarr.core.common import JSON, ZarrFormat
 logger = logging.getLogger("mknode")
 
 T = TypeVar("T")
+JSONObject = dict[str, JSON]
 
 ROOT_DIR_EXT = ".zarr"
-
-JSONObject = dict[str, JSON]
 METADATA_FILE = "zarr.json"
+
 DATA_TYPES = ["bool"]
 for base in ("int", "uint"):
     for precision in (8, 16, 32, 64):
@@ -257,7 +257,8 @@ def main():
 
     if args.store != args.path:
         args.store.parent.mkdir(exist_ok=True, parents=args.parents)
-        grp = zarr.open_group(args.store, zarr_format=args.zarr_version)
+        mode = "a" if args.parents else "r+"
+        grp = zarr.open_group(args.store, mode=mode, zarr_format=args.zarr_version)
         for name in args.path.relative_to(args.store).parts[:-1]:
             if args.parents:
                 grp = grp.require_group(name)
