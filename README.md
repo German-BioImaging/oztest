@@ -117,3 +117,9 @@ Run `just pre-commit-install` to install the hooks.
 
 CLI functionality is tested using [pytest](https://docs.pytest.org/en/stable/).
 Run `just test` to run the tests.
+
+### Python version support
+
+Some development tooling has tighter python version constraints than `oztest` itself.
+Linting and CI covers the full range of `oztest` python support specified in `pyproject.toml`,
+but developers should use the python version found in `.python-version`.
