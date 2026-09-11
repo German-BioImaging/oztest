@@ -25,7 +25,7 @@
               "coordinateTransformations": [
                 {
                   "input": {
-                    "path": "path/to/0"
+                    "path": "0"
                   },
                   "output": {
                     "name": "intrinsic"
@@ -37,7 +37,7 @@
                   "type": "scale"
                 }
               ],
-              "path": "path/to/0"
+              "path": "0"
             }
           ],
           "metadata": {
