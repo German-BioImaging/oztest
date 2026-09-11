@@ -1,26 +1,21 @@
 import json
-from typing import Any
 
 import pytest
 
 from oztest.case_filter import Case, CaseFilter
 
 
-def _cases_as_parametrize_kwargs(
-    filt: CaseFilter,
-) -> tuple[tuple[str, ...], list[tuple], dict[str, Any]]:
+def parametrize_cases(filt: CaseFilter):
     cases = sorted(c for c, _ in filt)
     argnames = ("case",)
-    argvalues = [(c,) for c in cases]
-    kwargs = {"ids": [c.slug() for c in cases]}
-    return (argnames, argvalues, kwargs)
-
-
-def parametrize_cases(filt: CaseFilter):
-    argnames, argvalues, kwargs = _cases_as_parametrize_kwargs(filt)
+    argvalues: list[tuple[Case]] = []
+    ids: list[str] = []
+    for c in cases:
+        argvalues.append((c,))
+        ids.append(c.slug())
 
     def decorator(test_fn):
-        return pytest.mark.parametrize(argnames, argvalues, **kwargs)(test_fn)
+        return pytest.mark.parametrize(argnames, argvalues, ids=ids)(test_fn)
 
     return decorator
 
@@ -35,16 +30,15 @@ def test_attributes_are_json(case: Case):
 
 
 @parametrize_cases(
-    CaseFilter.from_args(
-        kinds=["validate_zarr", "transform_coordinates"], version_spec=">=0.5"
-    )
+    CaseFilter.from_args(kinds=["validate_zarr", "transform_coordinates"])
 )
 def test_zarr_tests_are_zarr(case: Case):
-    zarrista = pytest.importorskip("zarrista")
+    pytest.importorskip("zarr")
+    import zarr
+
     with case.as_path() as p:
-        assert p.is_dir()
-        store = zarrista.store.FilesystemStore(p)
-        root = zarrista.Group.open(store)
-        # not sure whether this will error for malformed nodes,
-        # or just skip
-        _ = root.traverse()
+        root = zarr.open(p, mode="r")
+
+        if isinstance(root, zarr.Group):
+            for _ in root.members(None):
+                pass
