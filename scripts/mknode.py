@@ -21,13 +21,14 @@ from typing import TypeVar
 import zarr
 from zarr.core.common import JSON, ZarrFormat
 
+zarr.config.set({"array.write_empty_chunks": False})
+
 logger = logging.getLogger("mknode")
 
 T = TypeVar("T")
 JSONObject = dict[str, JSON]
 
 ROOT_DIR_EXT = ".zarr"
-METADATA_FILE = "zarr.json"
 
 DATA_TYPES = ["bool"]
 for base in ("int", "uint"):
@@ -82,30 +83,6 @@ class ArrayArgs:
                 fill_value = 0
         return cls(shape, data_type, fill_value)  # type:ignore
 
-    def get_metadata(self, attributes: JSONObject | None = None) -> JSONObject:
-        if attributes is None:
-            attributes = {}
-
-        a2b: JSONObject = {"name": "bytes"}
-        if self.data_type not in ("bool", "int8", "uint8"):
-            a2b["configuration"] = {"endian": "little"}
-
-        d = {
-            "zarr_format": 3,
-            "node_type": "array",
-            "shape": self.shape,
-            "data_type": self.data_type,
-            "chunk_grid": {
-                "name": "regular",
-                "configuration": {"chunk_shape": self.shape},
-            },
-            "chunk_key_encoding": {"name": "default"},
-            "fill_value": self.fill_value,
-            "codecs": [a2b],
-            "attributes": attributes,
-        }
-        return d
-
 
 @dataclass
 class Args:
@@ -143,8 +120,14 @@ class Args:
         parser.add_argument(
             "-a",
             "--attributes",
-            type=jso,
+            type=json.loads,
             help="attributes to add to the new node, as a JSON string representing an object",
+        )
+        parser.add_argument(
+            "--attributes-path",
+            "-A",
+            type=Path,
+            help="path to JSON file containing attributes (e.g. to seed a validate_zarr test from a parse_attributes test); will be overwritten by keys in --attributes",
         )
         parser.add_argument(
             "-f",
@@ -185,7 +168,7 @@ class Args:
         g.add_argument(
             "--fill-value",
             "-F",
-            type=jso,
+            type=json.loads,
             help="fill value to be used as JSON; not type-checked",
         )
         parsed = parser.parse_args(raw_args)
@@ -207,6 +190,21 @@ class Args:
                         storepath = p
                         break
 
+        attributes = {}
+
+        if parsed.attributes_path is not None:
+            jso = json.loads(parsed.attributes_path.read_text())
+            attributes.update(jso)
+
+        if parsed.attributes is not None:
+            for k, v in parsed.attributes.items():
+                if k in attributes:
+                    logger.warning(
+                        'Overwriting --attributes-path key "%s" with value from --attributes',
+                        k,
+                    )
+                    attributes[k] = v
+
         if storepath is None:
             logger.warning(
                 "No --store given, and could not infer from %s extension; node path will be used as store root, but should be renamed",
@@ -217,7 +215,7 @@ class Args:
         return cls(
             nodepath,
             storepath,
-            parsed.attributes or {},
+            attributes,
             parsed.force,
             parsed.parents,
             level,
@@ -229,26 +227,6 @@ class Args:
 def eprint(*args, **kwargs):
     kwargs.setdefault("file", sys.stderr)
     print(*args, **kwargs)
-
-
-def grp_metadata(attrs: JSONObject | None = None) -> JSONObject:
-    if attrs is None:
-        attrs = {}
-    return {"zarr_format": 3, "node_type": "group", "attributes": attrs}
-
-
-def write_node_metadata(path: Path, metadata: JSONObject):
-    s = json.dumps(metadata, indent=2, sort_keys=True) + "\n"
-    p = path.joinpath(METADATA_FILE)
-    p.write_text(s)
-    if logger.isEnabledFor(logging.INFO):
-        logger.info(
-            "Wrote metadata into %s : %s", p, json.dumps(metadata, sort_keys=True)
-        )
-
-
-def write_group_metadata(path: Path, attrs: JSONObject | None = None):
-    write_node_metadata(path, grp_metadata(attrs))
 
 
 def main():
