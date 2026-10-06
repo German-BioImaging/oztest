@@ -135,6 +135,15 @@ wheels = [
 ]
 
 [[package]]
+name = "jsonfold"
+version = "0.2.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/8f/ff/b112edd8bf174b769f75f33cf810bcc5e983ab6511ff069be8681fc24968/jsonfold-0.2.0.tar.gz", hash = "sha256:5a8c970c5f900c2dcce0a4613cf92d276e32f99b1813311ed76953b190eac317", size = 14680, upload-time = "2026-06-26T06:20:29.356Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/d5/2b/749544c0d6c46a8afaea6a71ef74a9e77bde62feccba8f80a5a7be85bbe1/jsonfold-0.2.0-py3-none-any.whl", hash = "sha256:cc6bf5dc9fa894724f3087766472781b6f31200e764e4a746e251474a1fa8787", size = 16416, upload-time = "2026-06-26T06:20:28.097Z" },
+]
+
+[[package]]
 name = "librt"
 version = "0.11.0"
 source = { registry = "https://pypi.org/simple" }
@@ -427,6 +436,7 @@ dependencies = [
 
 [package.dev-dependencies]
 dev = [
+    { name = "jsonfold" },
     { name = "mypy" },
     { name = "prek" },
     { name = "pytest" },
@@ -448,6 +458,7 @@ requires-dist = [
 
 [package.metadata.requires-dev]
 dev = [
+    { name = "jsonfold", specifier = ">=0.2.0" },
     { name = "mypy", specifier = ">=2.1.0" },
     { name = "prek", specifier = ">=0.4.5" },
     { name = "pytest", specifier = ">=9.1.1" },
