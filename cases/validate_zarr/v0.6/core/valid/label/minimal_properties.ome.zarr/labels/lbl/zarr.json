@@ -1,6 +1,24 @@
 {
   "attributes": {
     "ome": {
+      "image-label": {
+        "colors": [
+          {
+            "label-value": 1,
+            "rgba": [
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "properties": [
+          {
+            "label-value": 1
+          }
+        ]
+      },
       "multiscales": [
         {
           "coordinateSystems": [
