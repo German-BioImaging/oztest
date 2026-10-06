@@ -1,6 +1,13 @@
 {
   "attributes": {
     "ome": {
+      "image-label": {
+        "properties": [
+          {
+            "value": "foo"
+          }
+        ]
+      },
       "multiscales": [
         {
           "coordinateSystems": [
@@ -35,16 +42,6 @@
                     1
                   ],
                   "type": "scale"
-                },
-                {
-                  "input": {
-                    "name": "intrinsic",
-                    "path": "labels/lbl"
-                  },
-                  "output": {
-                    "name": "intrinsic"
-                  },
-                  "type": "identity"
                 }
               ],
               "path": "0"
