@@ -31,7 +31,7 @@ def list_files(p: Path) -> Iterable[Path]:
             yield root / f
 
 
-@dataclass
+@dataclass(order=True)
 class NodeResult:
     path: Path
     metadata: dict[str, Any]
@@ -89,7 +89,7 @@ class NodeResult:
             content = jsonfold.dumps(self.metadata[m]).rstrip()
             lines.append(textwrap.indent(content, common_indent + indent * 2))
 
-        for child in self.child_nodes:
+        for child in sorted(self.child_nodes):
             lines.append(child.to_str(self.path, indent, initial_level + 1))
 
         return "\n".join(lines)
@@ -97,16 +97,12 @@ class NodeResult:
 
 def main(raw: Sequence[str] | None = None):
     parser = ArgumentParser()
-    parser.add_argument("path", type=Path)
-    # parser.add_argument("-r", "--recursive", action="store_true")
+    parser.add_argument("path", nargs="+", type=Path)
     args = parser.parse_args(raw)
-    res = NodeResult.read(args.path)
-    print(res.to_str())
+    for p in args.path:
+        res = NodeResult.read(p)
+        print(res.to_str())
 
 
 if __name__ == "__main__":
-    main(
-        [
-            "/Users/cbarnes/repos/German-BioImaging/oztest/cases/validate_zarr/v0.6/core/valid/image/custom_type_axes.ome.zarr/"
-        ]
-    )
+    main()
