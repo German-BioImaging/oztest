@@ -19,13 +19,6 @@
   "codecs": [
     {
       "name": "bytes"
-    },
-    {
-      "configuration": {
-        "checksum": false,
-        "level": 0
-      },
-      "name": "zstd"
     }
   ],
   "data_type": "uint8",
