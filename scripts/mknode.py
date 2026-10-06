@@ -22,7 +22,11 @@ import numpy as np
 import zarr
 from zarr.core.common import JSON, ZarrFormat
 
-zarr.config.set({"array.write_empty_chunks": False})
+zarr.config.set(
+    {
+        "array.write_empty_chunks": False,
+    }
+)
 
 logger = logging.getLogger("mknode")
 
