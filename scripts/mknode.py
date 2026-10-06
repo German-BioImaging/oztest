@@ -21,7 +21,11 @@ from typing import TypeVar
 import zarr
 from zarr.core.common import JSON, ZarrFormat
 
-zarr.config.set({"array.write_empty_chunks": False})
+zarr.config.set(
+    {
+        "array.write_empty_chunks": False,
+    }
+)
 
 logger = logging.getLogger("mknode")
 
@@ -265,6 +269,7 @@ def main():
             chunks=aargs.chunk_shape,
             fill_value=aargs.fill_value,
             attributes=args.attributes,
+            compressors=[],
         )
 
     return 0
