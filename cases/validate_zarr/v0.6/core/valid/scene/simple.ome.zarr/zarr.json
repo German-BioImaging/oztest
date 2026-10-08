@@ -42,11 +42,11 @@
             "output": {
               "name": "atlas2"
             },
-            "scale": [
-              2,
-              2
+            "translation": [
+              50,
+              50
             ],
-            "type": "scale"
+            "type": "translation"
           }
         ]
       },
