@@ -15,6 +15,12 @@ whose arguments and intended function are specified in this repository.
 The testing tools then invoke the dingus with one test case at a time,
 collect the output, and tabulate the implementation's conformance to expectations.
 
+Currenty out of scope for this projects are:
+
+- examples of real-world data
+- benchmarks
+- tests for mutation or writing operations
+
 ## Test case layout
 
 Test cases are found in the [`cases/`](./cases/) directory.
@@ -117,6 +123,19 @@ Run `just pre-commit-install` to install the hooks.
 
 CLI functionality is tested using [pytest](https://docs.pytest.org/en/stable/).
 Run `just test` to run the tests.
+
+### Test case guidelines
+
+- Cases should represent a minimum reproducible example to exercise a particular feature
+- If the feature under test depends on other features, use a configuration from a `valid` test case as a base
+
+For `validate_zarr` tests:
+
+- Use Zarr groups instead of arrays where possible, for simplicity
+- Minimise the usage of different Zarr features where possible, e.g.
+  - Use a regular file system store with the default chunk key encoding
+  - For arrays, use a regular chunk grid with one chunk the same shape as the array
+  - Do not use any array-to-array or bytes-to-bytes codecs for array data
 
 ### Python version support
 
