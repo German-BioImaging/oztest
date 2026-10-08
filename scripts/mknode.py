@@ -1,7 +1,7 @@
 #!/usr/bin/env -S uv run --script
 # /// script
 # requires-python = ">= 3.12"
-# dependencies = ["zarr >= 3.3.0"]
+# dependencies = ["zarr >= 3.3.0", "numpy"]
 # ///
 """Script to create a new zarr node."""
 
@@ -18,6 +18,7 @@ from pathlib import Path
 from shutil import rmtree
 from typing import TypeVar
 
+import numpy as np
 import zarr
 from zarr.core.common import JSON, ZarrFormat
 
@@ -60,6 +61,7 @@ class ArrayArgs:
     shape: list[int]
     data_type: str
     fill_value: JSON
+    data: np.ndarray
 
     @property
     def chunk_shape(self) -> list[int]:
@@ -71,17 +73,28 @@ class ArrayArgs:
         shape: list[int] | None,
         data_type: str | None,
         fill_value: JSON | None = None,
+        data: list[float] | None = None,
     ):
-        if shape is None and data_type is None:
-            return None
         if (shape is None) != (data_type is None):
             raise ValueError("All array args must be given or none")
+        if shape is None or data_type is None:
+            return None
         if fill_value is None:
             if data_type == "bool":
                 fill_value = False
             else:
                 fill_value = 0
-        return cls(shape, data_type, fill_value)  # type:ignore
+        if data is not None:
+            length = np.prod(shape)
+            if len(data) == 1:
+                data *= length
+            elif length != len(data):
+                raise ValueError(f"expected {length} values, got {len(data)}")
+            vals = np.array(data, dtype=data_type).reshape(shape)
+        else:
+            vals = None
+
+        return cls(shape, data_type, fill_value, vals)  # type:ignore
 
 
 @dataclass
@@ -171,9 +184,15 @@ class Args:
             type=json.loads,
             help="fill value to be used as JSON; not type-checked",
         )
+        g.add_argument(
+            "--data",
+            "-d",
+            type=list_parser(float),
+            help="numeric values to be used as array contents; will be reshaped in C order",
+        )
         parsed = parser.parse_args(raw_args)
         maybe_array = ArrayArgs.maybe_from_args(
-            parsed.shape, parsed.datatype, parsed.fill_value
+            parsed.shape, parsed.datatype, parsed.fill_value, parsed.data
         )
         level = {0: logging.WARNING, 1: logging.INFO, 2: logging.DEBUG}.get(
             parsed.verbose, logging.DEBUG
@@ -258,15 +277,25 @@ def main():
         )
     else:
         aargs = args.array_args
-        zarr.create_array(
-            args.path,
-            shape=aargs.shape,
-            dtype=aargs.data_type,
-            chunks=aargs.chunk_shape,
-            fill_value=aargs.fill_value,
-            attributes=args.attributes,
-            compressors=[],
-        )
+        if aargs.data is None:
+            zarr.create_array(
+                args.path,
+                shape=aargs.shape,
+                dtype=aargs.data_type,
+                chunks=aargs.chunk_shape,
+                fill_value=aargs.fill_value,
+                attributes=args.attributes,
+                compressors=[],
+            )
+        else:
+            zarr.create_array(
+                args.path,
+                data=aargs.data,
+                chunks=aargs.chunk_shape,
+                fill_value=aargs.fill_value,
+                attributes=args.attributes,
+                compressors=[],
+            )
 
     return 0
 
