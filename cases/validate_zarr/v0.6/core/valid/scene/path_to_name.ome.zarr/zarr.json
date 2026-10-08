@@ -8,39 +8,25 @@
               {
                 "name": "y",
                 "type": "space",
-                "unit": "micrometer"
+                "unit": "nanometer"
               },
               {
                 "name": "x",
                 "type": "space",
-                "unit": "micrometer"
+                "unit": "nanometer"
               }
             ],
             "name": "atlas1"
-          },
-          {
-            "axes": [
-              {
-                "name": "y",
-                "type": "space",
-                "unit": "micrometer"
-              },
-              {
-                "name": "x",
-                "type": "space",
-                "unit": "micrometer"
-              }
-            ],
-            "name": "atlas2"
           }
         ],
         "coordinateTransformations": [
           {
             "input": {
-              "name": "atlas1"
+              "name": "intrinsic",
+              "path": "img"
             },
             "output": {
-              "name": "atlas2"
+              "name": "atlas1"
             },
             "translation": [
               50,
