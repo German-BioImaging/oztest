@@ -1,0 +1,62 @@
+{
+  "attributes": {
+    "ome": {
+      "scene": {
+        "coordinateSystems": [
+          {
+            "axes": [
+              {
+                "discrete": true,
+                "name": "c",
+                "type": "channel"
+              },
+              {
+                "name": "y",
+                "type": "space",
+                "unit": "micrometer"
+              },
+              {
+                "name": "x",
+                "type": "space",
+                "unit": "micrometer"
+              }
+            ],
+            "name": "rgb"
+          },
+          {
+            "axes": [
+              {
+                "name": "y",
+                "type": "space",
+                "unit": "micrometer"
+              },
+              {
+                "name": "x",
+                "type": "space",
+                "unit": "micrometer"
+              }
+            ],
+            "name": "label"
+          }
+        ],
+        "coordinateTransformations": [
+          {
+            "createdOutputs": [
+              0
+            ],
+            "input": {
+              "name": "label"
+            },
+            "output": {
+              "name": "rgb"
+            },
+            "type": "projectAxis"
+          }
+        ]
+      },
+      "version": "0.6"
+    }
+  },
+  "node_type": "group",
+  "zarr_format": 3
+}
