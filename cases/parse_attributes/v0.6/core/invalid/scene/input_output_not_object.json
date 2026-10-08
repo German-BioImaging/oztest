@@ -5,50 +5,43 @@
         {
           "axes": [
             {
-              "discrete": false,
-              "name": "x",
+              "name": "y",
               "type": "space",
               "unit": "micrometer"
             },
             {
-              "discrete": false,
-              "name": "y",
+              "name": "x",
               "type": "space",
               "unit": "micrometer"
             }
           ],
-          "name": "one"
+          "name": "atlas1"
         },
         {
           "axes": [
             {
-              "discrete": false,
-              "name": "x",
+              "name": "y",
               "type": "space",
               "unit": "micrometer"
             },
             {
-              "discrete": false,
-              "name": "y",
+              "name": "x",
               "type": "space",
               "unit": "micrometer"
             }
           ],
-          "name": "two"
+          "name": "atlas2"
         }
       ],
       "coordinateTransformations": [
         {
-          "forward": {
-            "type": "scale"
-          },
-          "input": {
-            "name": "one"
-          },
-          "output": {
-            "name": "two"
-          },
-          "type": "bijection"
+          "input": "atlas1",
+          "output": "atlas2",
+          "translation": [
+            50,
+            50
+          ],
+          "type": "translation"
         }
       ]
     },

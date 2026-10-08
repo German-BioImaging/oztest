@@ -5,19 +5,17 @@
         {
           "axes": [
             {
-              "discrete": false,
-              "name": "x",
+              "name": "y",
               "type": "space",
               "unit": "micrometer"
             },
             {
-              "discrete": false,
-              "name": "y",
+              "name": "x",
               "type": "space",
               "unit": "micrometer"
             }
           ],
-          "name": "world"
+          "name": "atlas1"
         }
       ]
     },
