@@ -265,6 +265,7 @@ def main():
             chunks=aargs.chunk_shape,
             fill_value=aargs.fill_value,
             attributes=args.attributes,
+            compressors=[],
         )
 
     return 0
