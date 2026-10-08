@@ -20,14 +20,14 @@
         {
           "axes": [
             {
-              "name": "y",
-              "type": "space",
-              "unit": "nanometer"
-            },
-            {
               "name": "x",
               "type": "space",
-              "unit": "nanometer"
+              "unit": "micrometer"
+            },
+            {
+              "name": "y",
+              "type": "space",
+              "unit": "micrometer"
             }
           ],
           "name": "atlas2"
@@ -41,11 +41,23 @@
           "output": {
             "name": "atlas2"
           },
-          "scale": [
-            1000,
-            1000
+          "transformations": [
+            {
+              "translation": [
+                50,
+                50
+              ],
+              "type": "translation"
+            },
+            {
+              "mapAxis": [
+                1,
+                0
+              ],
+              "type": "mapAxis"
+            }
           ],
-          "type": "scale"
+          "type": "sequence"
         }
       ]
     },
