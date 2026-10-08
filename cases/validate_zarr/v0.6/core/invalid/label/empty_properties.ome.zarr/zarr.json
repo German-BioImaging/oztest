@@ -1,9 +1,57 @@
 {
   "attributes": {
     "ome": {
-      "image-label": {
-        "properties": []
-      },
+      "multiscales": [
+        {
+          "coordinateSystems": [
+            {
+              "axes": [
+                {
+                  "name": "y",
+                  "type": "space",
+                  "unit": "micrometer"
+                },
+                {
+                  "name": "x",
+                  "type": "space",
+                  "unit": "micrometer"
+                }
+              ],
+              "name": "intrinsic"
+            }
+          ],
+          "datasets": [
+            {
+              "coordinateTransformations": [
+                {
+                  "input": {
+                    "path": "0"
+                  },
+                  "output": {
+                    "name": "intrinsic"
+                  },
+                  "scale": [
+                    1,
+                    1
+                  ],
+                  "type": "scale"
+                },
+                {
+                  "input": {
+                    "name": "intrinsic",
+                    "path": "labels/lbl"
+                  },
+                  "output": {
+                    "name": "intrinsic"
+                  },
+                  "type": "identity"
+                }
+              ],
+              "path": "0"
+            }
+          ]
+        }
+      ],
       "version": "0.6"
     }
   },

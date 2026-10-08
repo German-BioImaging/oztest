@@ -7,17 +7,19 @@
             {
               "axes": [
                 {
+                  "discrete": false,
                   "name": "y",
                   "type": "space",
                   "unit": "micrometer"
                 },
                 {
+                  "discrete": false,
                   "name": "x",
                   "type": "space",
                   "unit": "micrometer"
                 }
               ],
-              "name": "intrinsic"
+              "name": "physical"
             }
           ],
           "datasets": [
@@ -25,31 +27,19 @@
               "coordinateTransformations": [
                 {
                   "input": {
-                    "path": "0"
+                    "path": "array"
                   },
+                  "name": "transform-name",
                   "output": {
-                    "name": "intrinsic"
-                  },
-                  "scale": [
-                    1,
-                    1
-                  ],
-                  "type": "scale"
-                },
-                {
-                  "input": {
-                    "name": "intrinsic",
-                    "path": "labels/lbl"
-                  },
-                  "output": {
-                    "name": "intrinsic"
+                    "name": "physical"
                   },
                   "type": "identity"
                 }
               ],
-              "path": "0"
+              "path": "array"
             }
-          ]
+          ],
+          "name": "multiscales"
         }
       ],
       "version": "0.6"
