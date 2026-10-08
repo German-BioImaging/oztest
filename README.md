@@ -131,6 +131,8 @@ Run `just test` to run the tests.
 
 For `validate_zarr` tests:
 
+- Every `parse_attributes` case should have an equivalent `validate_zarr` case
+  - This may mean adding more Zarr nodes above or below the node with the attributes under test
 - Use Zarr groups instead of arrays where possible, for simplicity
 - Minimise the usage of different Zarr features where possible, e.g.
   - Use a regular file system store with the default chunk key encoding
