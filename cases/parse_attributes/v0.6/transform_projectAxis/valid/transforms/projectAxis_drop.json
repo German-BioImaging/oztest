@@ -5,6 +5,11 @@
         {
           "axes": [
             {
+              "discrete": true,
+              "name": "c",
+              "type": "channel"
+            },
+            {
               "name": "y",
               "type": "space",
               "unit": "micrometer"
@@ -15,37 +20,36 @@
               "unit": "micrometer"
             }
           ],
-          "name": "atlas1"
+          "name": "rgb"
         },
         {
           "axes": [
             {
               "name": "y",
               "type": "space",
-              "unit": "nanometer"
+              "unit": "micrometer"
             },
             {
               "name": "x",
               "type": "space",
-              "unit": "nanometer"
+              "unit": "micrometer"
             }
           ],
-          "name": "atlas2"
+          "name": "label"
         }
       ],
       "coordinateTransformations": [
         {
+          "droppedInputs": [
+            0
+          ],
           "input": {
-            "name": "atlas1"
+            "name": "rgb"
           },
           "output": {
-            "name": "atlas2"
+            "name": "label"
           },
-          "scale": [
-            1000,
-            1000
-          ],
-          "type": "scale"
+          "type": "projectAxis"
         }
       ]
     },

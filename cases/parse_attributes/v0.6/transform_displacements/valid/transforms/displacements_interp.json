@@ -22,12 +22,12 @@
             {
               "name": "y",
               "type": "space",
-              "unit": "nanometer"
+              "unit": "micrometer"
             },
             {
               "name": "x",
               "type": "space",
-              "unit": "nanometer"
+              "unit": "micrometer"
             }
           ],
           "name": "atlas2"
@@ -38,14 +38,12 @@
           "input": {
             "name": "atlas1"
           },
+          "interpolation": "linear",
           "output": {
             "name": "atlas2"
           },
-          "scale": [
-            1000,
-            1000
-          ],
-          "type": "scale"
+          "path": "displacements_multiscale",
+          "type": "displacements"
         }
       ]
     },

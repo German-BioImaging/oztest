@@ -16,36 +16,22 @@
             }
           ],
           "name": "atlas1"
-        },
-        {
-          "axes": [
-            {
-              "name": "y",
-              "type": "space",
-              "unit": "nanometer"
-            },
-            {
-              "name": "x",
-              "type": "space",
-              "unit": "nanometer"
-            }
-          ],
-          "name": "atlas2"
         }
       ],
       "coordinateTransformations": [
         {
           "input": {
-            "name": "atlas1"
+            "name": "intrinsic",
+            "path": "img"
           },
           "output": {
-            "name": "atlas2"
+            "name": "atlas1"
           },
-          "scale": [
-            1000,
-            1000
+          "translation": [
+            50,
+            50
           ],
-          "type": "scale"
+          "type": "translation"
         }
       ]
     },

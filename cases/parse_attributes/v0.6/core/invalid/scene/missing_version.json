@@ -22,12 +22,12 @@
             {
               "name": "y",
               "type": "space",
-              "unit": "nanometer"
+              "unit": "micrometer"
             },
             {
               "name": "x",
               "type": "space",
-              "unit": "nanometer"
+              "unit": "micrometer"
             }
           ],
           "name": "atlas2"
@@ -41,14 +41,13 @@
           "output": {
             "name": "atlas2"
           },
-          "scale": [
-            1000,
-            1000
+          "translation": [
+            50,
+            50
           ],
-          "type": "scale"
+          "type": "translation"
         }
       ]
-    },
-    "version": "0.6"
+    }
   }
 }

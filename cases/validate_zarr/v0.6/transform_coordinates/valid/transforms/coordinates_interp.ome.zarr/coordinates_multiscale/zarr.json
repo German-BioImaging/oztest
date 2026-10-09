@@ -1,0 +1,55 @@
+{
+  "attributes": {
+    "ome": {
+      "multiscales": [
+        {
+          "coordinateSystems": [
+            {
+              "axes": [
+                {
+                  "discrete": true,
+                  "name": "c",
+                  "type": "coordinate"
+                },
+                {
+                  "name": "y",
+                  "type": "space",
+                  "unit": "micrometer"
+                },
+                {
+                  "name": "x",
+                  "type": "space",
+                  "unit": "micrometer"
+                }
+              ],
+              "name": "atlas1"
+            }
+          ],
+          "datasets": [
+            {
+              "coordinateTransformations": [
+                {
+                  "input": {
+                    "path": "s0"
+                  },
+                  "output": {
+                    "name": "atlas1"
+                  },
+                  "scale": [
+                    10,
+                    10
+                  ],
+                  "type": "scale"
+                }
+              ],
+              "path": "s0"
+            }
+          ]
+        }
+      ],
+      "version": "0.6"
+    }
+  },
+  "node_type": "group",
+  "zarr_format": 3
+}
