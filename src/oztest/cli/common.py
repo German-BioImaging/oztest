@@ -102,6 +102,9 @@ FormatArg = Annotated[
         help="Output format.",
     ),
 ]
+NoProgressArg = Annotated[
+    bool, typer.Option("--no-progress", "-P", help="Do not show the progress bar.")
+]
 
 
 def parse_dingus_invocation(items: list[str] | None) -> None | list[str]:

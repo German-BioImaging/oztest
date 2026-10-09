@@ -1,5 +1,7 @@
 # OME-Zarr conformance tests
 
+> ⚠️ This project is a work in progress. The test suites are expected to grow and almost certainly need further correction. ⚠️
+
 This repository provides test cases and testing tools for OME-Zarr implementations.
 
 The cases themselves are organised by type in the `cases/` directory.
@@ -12,6 +14,12 @@ Commonly, OME-Zarr implementors provide a simple ["dingus"](https://talk.commonm
 whose arguments and intended function are specified in this repository.
 The testing tools then invoke the dingus with one test case at a time,
 collect the output, and tabulate the implementation's conformance to expectations.
+
+Currenty out of scope for this projects are:
+
+- examples of real-world data
+- benchmarks
+- tests for mutation or writing operations
 
 ## Test case layout
 
@@ -98,11 +106,12 @@ The script used for this import is under `scripts/import_v06_cases.py`.
 
 ## Versioning
 
-This repository uses [calendar versioning](https://calver.org/)
+This project is currently in alpha (`0.x` series).
+The project version does not correspond to OME-Zarr versions: see the [changelog](./CHANGELOG.md) for details on support for different OME-Zarr versions.
+
+Once released, this repository will use [calendar versioning](https://calver.org/) with format `<YYYY>.<MM>.<minor>`
 under the [python package version scheme](https://packaging.python.org/en/latest/specifications/version-specifiers/#version-scheme)
 originally proposed in [PEP 440](https://peps.python.org/pep-0440/).
-
-See the [changelog](./CHANGELOG.md) for details on support for different OME-Zarr versions.
 
 ## Contributing
 
@@ -114,3 +123,24 @@ Run `just pre-commit-install` to install the hooks.
 
 CLI functionality is tested using [pytest](https://docs.pytest.org/en/stable/).
 Run `just test` to run the tests.
+
+### Test case guidelines
+
+- Cases should represent a minimum reproducible example to exercise a particular feature
+- If the feature under test depends on other features, use a configuration from a `valid` test case as a base
+
+For `validate_zarr` tests:
+
+- Every `parse_attributes` case should have an equivalent `validate_zarr` case
+  - This may mean adding more Zarr nodes above or below the node with the attributes under test
+- Use Zarr groups instead of arrays where possible, for simplicity
+- Minimise the usage of different Zarr features where possible, e.g.
+  - Use a regular file system store with the default chunk key encoding
+  - For arrays, use a regular chunk grid with one chunk the same shape as the array
+  - Do not use any array-to-array or bytes-to-bytes codecs for array data
+
+### Python version support
+
+Some development tooling has tighter python version constraints than `oztest` itself.
+Linting and CI covers the full range of `oztest` python support specified in `pyproject.toml`,
+but developers should use the python version found in `.python-version`.

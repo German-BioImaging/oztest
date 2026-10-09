@@ -40,8 +40,12 @@
         ],
         "coordinateTransformations": [
           {
-            "input": "physical",
-            "output": "output",
+            "input": {
+              "name": "physical"
+            },
+            "output": {
+              "name": "output"
+            },
             "path": "translation_params_path",
             "type": "translation"
           }
@@ -50,9 +54,13 @@
           {
             "coordinateTransformations": [
               {
-                "input": "array",
+                "input": {
+                  "path": "array"
+                },
                 "name": "transform-name",
-                "output": "physical",
+                "output": {
+                  "name": "physical"
+                },
                 "type": "identity"
               }
             ],

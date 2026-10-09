@@ -14,6 +14,8 @@ from packaging.version import Version
 
 logger = logging.getLogger(__name__)
 
+ZARR_META_FILES = ("zarr.json", ".zattrs", ".zgroup", ".zarray")
+
 
 def case_kinds(path: Path | None = None) -> Iterable[tuple[str, Any]]:
     """Iterate over case kinds and the associated Traversable."""
@@ -48,16 +50,40 @@ def case_kind_version_profile_validities(
             yield (d.name, d)
 
 
-def _iter_files_recursive(trav, prefix: str = "") -> Iterable[tuple[str, Any]]:
-    """Recursively walk a Traversable, yielding (relative_path, Traversable) for every file found."""
+def maybe_join(*args: str, sep="/"):
+    return sep.join(a for a in args if a)
+
+
+def _case_kind_version_validity_names_inner(
+    trav, prefix: str = ""
+) -> Iterable[tuple[str, Any]]:
+    """Recursively walk a Traversable, yielding (relative_path, Traversable) for every test case found.
+
+    Test cases are either files or the top of a Zarr hierarchy.
+    """
     for item in trav.iterdir():
         if item.name.startswith("__") or item.name.startswith("."):
             continue
-        rel = f"{prefix}/{item.name}" if prefix else item.name
-        if item.is_dir():
-            yield from _iter_files_recursive(item, rel)
+
+        if is_case(item):
+            stub = item.name.split(".")[0]
+            yield (maybe_join(prefix, stub), item)
         else:
-            yield (rel, item)
+            yield from _case_kind_version_validity_names_inner(
+                item, maybe_join(prefix, item.name)
+            )
+
+
+def is_case(trav):
+    """If the traversible (path) is a file or a directory containing a Zarr metadata file."""
+    if trav.is_file():
+        return True
+
+    for fname in ZARR_META_FILES:
+        if trav.joinpath(fname).is_file():
+            return True
+
+    return False
 
 
 def case_kind_version_validity_names(
@@ -71,9 +97,7 @@ def case_kind_version_validity_names(
     (e.g. `invalid/image/foo.json`) purely for organisational purposes;
     that nesting is not itself a filterable attribute.
     """
-    for rel, item in _iter_files_recursive(case_kind_version_validity_trav):
-        name, _, ext = rel.rpartition(".")
-        yield (name if ext else rel, item)
+    yield from _case_kind_version_validity_names_inner(case_kind_version_validity_trav)
 
 
 class OzVersion(Version):
@@ -271,6 +295,28 @@ class CaseFilter(Iterable):
         self.additional_cases = additional_cases or []
         self.builtin_cases = builtin_cases
         self.verbose = verbose
+
+    @classmethod
+    def from_args(
+        cls,
+        kinds: list[str] | None = None,
+        version_spec: str | None = None,
+        include_profile: list[str] | None = None,
+        exclude_profile: list[str] | None = None,
+        include_validity: list[str] | None = None,
+        exclude_validity: list[str] | None = None,
+        include_name: list[str] | None = None,
+        exclude_name: list[str] | None = None,
+    ):
+        return cls(
+            None,
+            True,
+            make_kind_filter(kinds),
+            make_version_filter(version_spec),
+            make_str_filter(include_profile, exclude_profile),
+            make_validity_filter(include_validity, exclude_validity),
+            make_str_filter(include_name, exclude_name),
+        )
 
     def _iter_case_roots(self) -> Iterator[tuple[Case, bool]]:
         if self.builtin_cases:

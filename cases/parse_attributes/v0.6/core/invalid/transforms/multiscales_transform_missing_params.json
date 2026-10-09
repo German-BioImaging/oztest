@@ -52,9 +52,13 @@
         ],
         "coordinateTransformations": [
           {
-            "input": "physical",
+            "input": {
+              "name": "physical"
+            },
             "name": "some_additional_transform",
-            "output": "output",
+            "output": {
+              "name": "output"
+            },
             "type": "affine"
           }
         ],
@@ -62,9 +66,13 @@
           {
             "coordinateTransformations": [
               {
-                "input": "array",
+                "input": {
+                  "path": "array"
+                },
                 "name": "transform-name",
-                "output": "physical",
+                "output": {
+                  "name": "physical"
+                },
                 "transformations": [
                   {
                     "scale": [

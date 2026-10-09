@@ -24,6 +24,10 @@ fix:
 repl:
     uv run --all-groups --all-extras --with ipython ipython
 
+# Create a zarr node (add arguments).
+mknode +ARGS='--help':
+    uv run --script scripts/mknode.py {{ ARGS }}
+
 # Test the python package.
 test:
     uv run --no-default-groups --no-dev --group test pytest -v

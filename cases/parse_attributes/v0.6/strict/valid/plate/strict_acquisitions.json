@@ -10,13 +10,13 @@
       ],
       "columns": [
         {
-          "name": "A"
+          "name": "1"
         }
       ],
       "name": "test plate",
       "rows": [
         {
-          "name": "1"
+          "name": "A"
         }
       ],
       "wells": [
