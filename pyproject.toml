@@ -13,16 +13,18 @@ dependencies = [
 ]
 
 [dependency-groups]
+jsonschema_dingus = ["jsonschema", "referencing", "platformdirs"]
 test = [
     "pytest>=9.1.1",
     "zarr>=3.3; python_version >= '3.12'",
+    {include-group = "jsonschema_dingus"},
 ]
 dev = [
     "jsonfold>=0.2.0",
     "mypy>=2.1.0",
     "prek>=0.4.5",
     "ruff>=0.15.17",
-    {include-group = "test"},
+    { include-group = "test" },
 ]
 
 [project.scripts]

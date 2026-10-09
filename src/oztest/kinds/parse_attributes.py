@@ -45,9 +45,11 @@ async def run_parse_attributes_single(
         )
         return_code = await proc.wait()
 
-        res, _stderr = await asyncio.gather(
+        res, stderr = await asyncio.gather(
             read_json(proc.stdout, logger), read_stream(proc.stderr)
         )
+        if stderr:
+            logger.info("Got STDERR\n%s", stderr)
 
     status: Status | None = None
     msg: str | None = None
