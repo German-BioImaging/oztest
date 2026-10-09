@@ -7,7 +7,14 @@ from pathlib import Path
 from typing import Annotated, Literal
 
 import typer
-from rich.progress import Progress
+from rich.progress import (
+    BarColumn,
+    MofNCompleteColumn,
+    Progress,
+    TaskProgressColumn,
+    TextColumn,
+    TimeElapsedColumn,
+)
 
 from oztest.kinds.common import OutputConfig
 
@@ -186,8 +193,16 @@ def run(
     else:
         p = out_file
 
-    with Progress(disable=no_progress) as progress:
-        out_cfg = OutputConfig(p, format, progress)
+    progress = Progress(
+        TextColumn("[progress.description]{task.description}"),
+        BarColumn(),
+        TaskProgressColumn(),
+        MofNCompleteColumn(),
+        TimeElapsedColumn(),
+        disable=no_progress,
+    )
+    with progress as pbar:
+        out_cfg = OutputConfig(p, format, pbar)
 
         asyncio.run(run_parse_attributes(args, filt, out_cfg))
 
