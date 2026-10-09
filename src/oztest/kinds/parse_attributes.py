@@ -8,6 +8,7 @@ from importlib.metadata import version
 from typing import Any
 
 from rich import print as rprint
+from rich.progress import Progress, TaskID
 
 from ..case_filter import Case, CaseFilter
 from ..types import Validity
@@ -32,7 +33,9 @@ async def read_json(stream: None | asyncio.StreamReader, logger=logger) -> JSON 
     return json.loads(s)
 
 
-async def run_parse_attributes_single(dingus: list[str], case: Case):
+async def run_parse_attributes_single(
+    dingus: list[str], case: Case, prog_task: tuple[Progress, TaskID]
+):
     logger = logging.getLogger(f"{__name__}.{case.slug()}")
     with case.as_path() as p:
         cmd = [*dingus, str(p)]
@@ -62,6 +65,9 @@ async def run_parse_attributes_single(dingus: list[str], case: Case):
     else:
         status = "error"
         msg = "No output from dingus"
+
+    prog, task = prog_task
+    prog.advance(task)
 
     return ValidationResult(case, cmd, status, msg)
 
@@ -137,12 +143,21 @@ async def run_parse_attributes(
     dingus: list[str], cases: CaseFilter, output: OutputConfig
 ):
     futs: list[Awaitable[ValidationResult]] = []
+    prog = output.progress
+    gath_task = prog.add_task("Gathering cases", total=None)
+    exec_task = prog.add_task("Running tests", total=None)
+    prog.start_task(gath_task)
     for tcase, should_run in cases:
         if not should_run:
             continue
-        futs.append(run_parse_attributes_single(dingus, tcase))
+        futs.append(run_parse_attributes_single(dingus, tcase, (prog, exec_task)))
+        prog.advance(gath_task)
+    prog.stop_task(gath_task)
 
+    prog.update(exec_task, total=len(futs))
+    prog.start_task(exec_task)
     out = await asyncio.gather(*futs)
+    prog.stop_task(exec_task)
 
     match output.format:
         case "json":

@@ -7,6 +7,7 @@ from pathlib import Path
 from typing import Annotated, Literal
 
 import typer
+from rich.progress import Progress
 
 from oztest.kinds.common import OutputConfig
 
@@ -34,6 +35,7 @@ from .common import (
     InvokeDingusArgs,
     KindsArg,
     NoBuiltinArg,
+    NoProgressArg,
     PathOrStdOutputArg,
     VerbosityArg,
     VersionSpecifierArg,
@@ -160,6 +162,7 @@ def run(
     verbosity: VerbosityArg = 0,
     out_file: PathOrStdOutputArg = STDIO_PATH,
     format: FormatArg = "tsv",
+    no_progress: NoProgressArg = False,
     dingus: InvokeDingusArgs = None,
 ):
     """Run tests."""
@@ -182,9 +185,11 @@ def run(
         p = None
     else:
         p = out_file
-    out_cfg = OutputConfig(p, format)
 
-    asyncio.run(run_parse_attributes(args, filt, out_cfg))
+    with Progress(disable=no_progress) as progress:
+        out_cfg = OutputConfig(p, format, progress)
+
+        asyncio.run(run_parse_attributes(args, filt, out_cfg))
 
 
 @app.command()

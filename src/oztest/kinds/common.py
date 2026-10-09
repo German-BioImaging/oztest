@@ -8,6 +8,8 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import IO, Literal, NamedTuple
 
+from rich.progress import Progress
+
 from ..case_filter import Case
 
 JSON = int | float | str | None | list["JSON"] | dict[str, "JSON"]
@@ -48,6 +50,7 @@ class Result(NamedTuple):
 class OutputConfig:
     out_file: Path | None
     format: Literal["tsv", "json"]
+    progress: Progress
 
     def is_a_tty(self) -> bool:
         return self.out_file is None and sys.stdout.isatty()
