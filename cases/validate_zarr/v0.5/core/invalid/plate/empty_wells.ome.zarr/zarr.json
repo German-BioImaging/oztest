@@ -1,0 +1,22 @@
+{
+  "attributes": {
+    "ome": {
+      "plate": {
+        "columns": [
+          {
+            "name": "1"
+          }
+        ],
+        "rows": [
+          {
+            "name": "A"
+          }
+        ],
+        "wells": {}
+      },
+      "version": "0.5"
+    }
+  },
+  "node_type": "group",
+  "zarr_format": 3
+}
