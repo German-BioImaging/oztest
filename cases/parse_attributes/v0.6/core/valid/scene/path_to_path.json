@@ -1,0 +1,24 @@
+{
+  "ome": {
+    "scene": {
+      "coordinateTransformations": [
+        {
+          "input": {
+            "name": "intrinsic",
+            "path": "img"
+          },
+          "output": {
+            "name": "intrinsic",
+            "path": "img2"
+          },
+          "translation": [
+            50,
+            50
+          ],
+          "type": "translation"
+        }
+      ]
+    },
+    "version": "0.6"
+  }
+}

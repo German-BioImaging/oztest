@@ -1,0 +1,58 @@
+{
+  "attributes": {
+    "ome": {
+      "scene": {
+        "coordinateSystems": [
+          {
+            "axes": [
+              {
+                "name": "y",
+                "type": "space",
+                "unit": "micrometer"
+              },
+              {
+                "name": "x",
+                "type": "space",
+                "unit": "micrometer"
+              }
+            ],
+            "name": "atlas1"
+          },
+          {
+            "axes": [
+              {
+                "name": "y",
+                "type": "space",
+                "unit": "nanometer"
+              },
+              {
+                "name": "x",
+                "type": "space",
+                "unit": "nanometer"
+              }
+            ],
+            "name": "atlas2"
+          }
+        ],
+        "coordinateTransformations": [
+          {
+            "input": {
+              "name": "atlas1"
+            },
+            "output": {
+              "name": "atlas2"
+            },
+            "scale": [
+              1000,
+              1000
+            ],
+            "type": "scale"
+          }
+        ]
+      },
+      "version": "0.6"
+    }
+  },
+  "node_type": "group",
+  "zarr_format": 3
+}
