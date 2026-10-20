@@ -157,6 +157,17 @@
                         ],
                         "type": "translation"
                       }
+                    },
+                    {
+                      "inputAxes": [
+                        2
+                      ],
+                      "outputAxes": [
+                        2
+                      ],
+                      "transformation": {
+                        "type": "identity"
+                      }
                     }
                   ],
                   "type": "byDimension"
