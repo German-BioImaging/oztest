@@ -6,10 +6,14 @@ end_of_line = lf
 insert_final_newline = true
 trim_trailing_whitespace = true
 
-[*.{json,yaml}]
+[{*.json,*.yaml,.zattrs,.zgroup,.zarray}]
 indent_style = space
 indent_size = 2
 
 [*.{md,toml}]
+indent_style = space
+indent_size = 4
+
+[justfile]
 indent_style = space
 indent_size = 4
