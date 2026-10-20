@@ -5,7 +5,7 @@
       "well": {
         "images": [
           {
-            "acquisition": 0,
+            "acquisition": "0",
             "path": "0"
           }
         ]
