@@ -1,0 +1,21 @@
+{
+  "plate": {
+    "columns": [
+      {
+        "name": "A"
+      }
+    ],
+    "rows": [
+      {
+        "concentration": 10
+      }
+    ],
+    "wells": [
+      {
+        "columnIndex": 0,
+        "path": "1/A",
+        "rowIndex": 0
+      }
+    ]
+  }
+}
