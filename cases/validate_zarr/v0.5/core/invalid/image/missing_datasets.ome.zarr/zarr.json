@@ -1,0 +1,25 @@
+{
+  "attributes": {
+    "ome": {
+      "multiscales": [
+        {
+          "axes": [
+            {
+              "name": "y",
+              "type": "space",
+              "unit": "micrometer"
+            },
+            {
+              "name": "x",
+              "type": "space",
+              "unit": "micrometer"
+            }
+          ]
+        }
+      ],
+      "version": "0.5"
+    }
+  },
+  "node_type": "group",
+  "zarr_format": 3
+}

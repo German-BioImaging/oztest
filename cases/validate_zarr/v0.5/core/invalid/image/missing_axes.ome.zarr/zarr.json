@@ -1,0 +1,27 @@
+{
+  "attributes": {
+    "ome": {
+      "multiscales": [
+        {
+          "datasets": [
+            {
+              "coordinateTransformations": [
+                {
+                  "scale": [
+                    1,
+                    1
+                  ],
+                  "type": "scale"
+                }
+              ],
+              "path": "0"
+            }
+          ]
+        }
+      ],
+      "version": "0.5"
+    }
+  },
+  "node_type": "group",
+  "zarr_format": 3
+}
