@@ -4,7 +4,8 @@
     "configuration": {
       "chunk_shape": [
         2,
-        2
+        3,
+        3
       ]
     },
     "name": "regular"
@@ -28,7 +29,8 @@
   "node_type": "array",
   "shape": [
     2,
-    2
+    3,
+    3
   ],
   "storage_transformers": [],
   "zarr_format": 3
