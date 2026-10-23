@@ -20,6 +20,18 @@
               "name": "intrinsic"
             }
           ],
+          "coordinateTransformations": [
+            {
+              "input": {
+                "name": "intrinsic",
+                "path": "labels/lbl"
+              },
+              "output": {
+                "name": "intrinsic"
+              },
+              "type": "identity"
+            }
+          ],
           "datasets": [
             {
               "coordinateTransformations": [
@@ -35,16 +47,6 @@
                     1
                   ],
                   "type": "scale"
-                },
-                {
-                  "input": {
-                    "name": "intrinsic",
-                    "path": "labels/lbl"
-                  },
-                  "output": {
-                    "name": "intrinsic"
-                  },
-                  "type": "identity"
                 }
               ],
               "path": "0"
