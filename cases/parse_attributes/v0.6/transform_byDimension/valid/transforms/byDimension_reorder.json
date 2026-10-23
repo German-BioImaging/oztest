@@ -1,0 +1,75 @@
+{
+  "ome": {
+    "scene": {
+      "coordinateSystems": [
+        {
+          "axes": [
+            {
+              "name": "z",
+              "type": "space",
+              "unit": "nanometer"
+            },
+            {
+              "name": "y",
+              "type": "space",
+              "unit": "nanometer"
+            },
+            {
+              "name": "x",
+              "type": "space",
+              "unit": "nanometer"
+            }
+          ],
+          "name": "atlas1"
+        },
+        {
+          "axes": [
+            {
+              "name": "x",
+              "type": "space",
+              "unit": "nanometer"
+            },
+            {
+              "name": "y",
+              "type": "space",
+              "unit": "nanometer"
+            },
+            {
+              "name": "z",
+              "type": "space",
+              "unit": "nanometer"
+            }
+          ],
+          "name": "atlas2"
+        }
+      ],
+      "coordinateTransformations": [
+        {
+          "input": {
+            "name": "atlas1"
+          },
+          "output": {
+            "name": "atlas2"
+          },
+          "transformations": [
+            {
+              "inputAxes": [
+                0,
+                1,
+                2
+              ],
+              "outputAxes": [
+                2,
+                1,
+                0
+              ],
+              "type": "identity"
+            }
+          ],
+          "type": "byDimension"
+        }
+      ]
+    },
+    "version": "0.6"
+  }
+}
