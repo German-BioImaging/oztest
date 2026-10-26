@@ -60,10 +60,12 @@
                 "outputAxes": [
                   0
                 ],
-                "scale": [
-                  1000
-                ],
-                "type": "scale"
+                "transformation": {
+                  "scale": [
+                    1000
+                  ],
+                  "type": "scale"
+                }
               },
               {
                 "inputAxes": [
@@ -74,11 +76,13 @@
                   1,
                   2
                 ],
-                "translation": [
-                  50,
-                  50
-                ],
-                "type": "translation"
+                "transformation": {
+                  "translation": [
+                    50,
+                    50
+                  ],
+                  "type": "translation"
+                }
               }
             ],
             "type": "byDimension"

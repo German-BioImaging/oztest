@@ -63,7 +63,9 @@
                 1,
                 0
               ],
-              "type": "identity"
+              "transformation": {
+                "type": "identity"
+              }
             }
           ],
           "type": "byDimension"
