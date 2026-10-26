@@ -1,0 +1,45 @@
+{
+  "attributes": {
+    "ome": {
+      "multiscales": [
+        {
+          "axes": [
+            {
+              "name": "t",
+              "type": "time",
+              "unit": "micrometer"
+            },
+            {
+              "name": "y",
+              "type": "space",
+              "unit": "micrometer"
+            },
+            {
+              "name": "x",
+              "type": "space",
+              "unit": "micrometer"
+            }
+          ],
+          "datasets": [
+            {
+              "coordinateTransformations": [
+                {
+                  "scale": [
+                    1.0,
+                    0.13,
+                    0.13
+                  ],
+                  "type": "scale"
+                }
+              ],
+              "path": "0"
+            }
+          ]
+        }
+      ],
+      "version": "0.5"
+    }
+  },
+  "node_type": "group",
+  "zarr_format": 3
+}
