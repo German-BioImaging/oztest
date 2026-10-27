@@ -1,11 +1,4 @@
 {
-  "image-label": {
-    "properties": [
-      {
-        "value": "foo"
-      }
-    ]
-  },
   "multiscales": [
     {
       "axes": [
