@@ -78,7 +78,7 @@ Conformance for validating OME-Zarr data and metadata can be tested at several l
 ### parse_attributes
 
 These cases exercise levels 1 and 2 validation;
-whether a single Zarr attributes object containing OME-Zarr can be represented and validated.
+whether a single Zarr attributes object containing OME-Zarr metadata can be represented and validated.
 
 See [cases/parse_attributes/README.md](./cases/parse_attributes/README.md) for more details.
 
