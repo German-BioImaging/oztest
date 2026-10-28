@@ -1,7 +1,10 @@
 {
   "attributes": {
-    "well": {
-      "images": []
+    "ome": {
+      "version": "0.6",
+      "well": {
+        "images": []
+      }
     }
   },
   "node_type": "group",
