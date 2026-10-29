@@ -1,14 +1,17 @@
 {
   "attributes": {
-    "well": {
-      "images": [
-        {
-          "path": "0"
-        },
-        {
-          "path": "0"
-        }
-      ]
+    "ome": {
+      "version": "0.6",
+      "well": {
+        "images": [
+          {
+            "path": "0"
+          },
+          {
+            "path": "0"
+          }
+        ]
+      }
     }
   },
   "node_type": "group",
