@@ -176,11 +176,10 @@ async def run_cases(
 
     match output.format:
         case "json":
-            results = [v.to_dict(True, False) for v in results]
             jso = {
                 "command": dingus,
                 "oztest_version": version("oztest"),
-                "results": results,
+                "results": [v.to_dict(True, False) for v in results],
             }
             with output.open() as f:
                 json.dump(jso, f, indent=2, sort_keys=True)
