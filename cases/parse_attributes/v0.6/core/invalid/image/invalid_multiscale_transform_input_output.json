@@ -23,12 +23,8 @@
           {
             "coordinateTransformations": [
               {
-                "input": {
-                  "path": "s0"
-                },
-                "output": {
-                  "name": "intrinsic"
-                },
+                "input": "s0",
+                "output": "intrinsic",
                 "scale": [
                   1,
                   1
