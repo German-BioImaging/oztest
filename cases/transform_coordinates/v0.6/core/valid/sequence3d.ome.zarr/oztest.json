@@ -1,0 +1,29 @@
+{
+  "description": "A 3d transform sequence whose transformations do not commute.",
+  "transform_coordinates": {
+    "source": {
+      "coordinates": [
+        [
+          1,
+          2,
+          3
+        ]
+      ],
+      "name": "input"
+    },
+    "target": {
+      "coordinates": [
+        [
+          22,
+          -22,
+          33
+        ]
+      ],
+      "name": "output"
+    },
+    "tolerance": {
+      "absolute": 1e-6,
+      "relative": 0.001
+    }
+  }
+}
