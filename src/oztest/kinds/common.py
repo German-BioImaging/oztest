@@ -54,6 +54,16 @@ class Oztest:
     description: str | None = None
 
     @classmethod
+    def from_path(cls, p: Path) -> Self | None:
+        if p.is_dir():
+            p = p.joinpath("oztest.json")
+        if not p.exists():
+            return None
+        txt = p.read_text()
+        jso = json.loads(txt)
+        return cls.from_jso(jso)
+
+    @classmethod
     def from_jso(cls, jso: JSON) -> Self:
         if not isinstance(jso, dict):
             raise TypeError(f"Expected JSON object, got {type(jso).__name__}")
