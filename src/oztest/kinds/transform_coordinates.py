@@ -66,6 +66,12 @@ class OztestTransformCoordinates:
     description: str | None = None
 
     @classmethod
+    def from_dir(cls, dpath: Path) -> Self:
+        txt = dpath.joinpath(CONFIG_NAME).read_text()
+        jso = json.loads(txt)
+        return cls.from_jso(jso)
+
+    @classmethod
     def from_jso(cls, jso: JSON) -> Self:
         if not isinstance(jso, dict):
             raise TypeError(f"Expected JSON object, got {type(jso).__name__}")
