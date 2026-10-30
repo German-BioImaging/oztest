@@ -104,6 +104,13 @@ repo in [PR #5](https://github.com/clbarnes/oztest/pull/5). The script used for 
 from the `ngff-spec` repo at commit [5c76733](https://github.com/ome/ngff-spec/commit/5c76733fe3a1f97a3957909c879b15d57689f74e).
 The script used for this import is under `scripts/import_v06_cases.py`.
 
+## Custom test cases
+
+If you extend your implementation to include metadata not in the OME-Zarr spec, you can use oztest too.
+
+Structure your test cases in the same directory hierarchy
+and use the `--custom-cases` argument to have them included in test discovery.
+
 ## Versioning
 
 This project is currently in alpha (`0.x` series).

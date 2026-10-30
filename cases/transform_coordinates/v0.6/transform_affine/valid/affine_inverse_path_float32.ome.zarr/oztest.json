@@ -1,0 +1,59 @@
+{
+  "description": "Scale and translation as an affine. (inverse)",
+  "transform_coordinates": {
+    "source": {
+      "coordinates": [
+        [
+          18,
+          57,
+          116
+        ],
+        [
+          20,
+          60,
+          120
+        ],
+        [
+          22,
+          63,
+          124
+        ],
+        [
+          24,
+          66,
+          128
+        ]
+      ],
+      "name": "output"
+    },
+    "target": {
+      "coordinates": [
+        [
+          -1,
+          -1,
+          -1
+        ],
+        [
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          1
+        ],
+        [
+          2,
+          2,
+          2
+        ]
+      ],
+      "name": "input"
+    },
+    "tolerance": {
+      "absolute": 1e-6,
+      "relative": 0.001
+    }
+  }
+}

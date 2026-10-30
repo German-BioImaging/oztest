@@ -3,6 +3,7 @@ import json
 import pytest
 
 from oztest.case_filter import Case, CaseFilter
+from oztest.kinds.transform_coordinates import OztestTransformCoordinates
 
 
 def parametrize_cases(filt: CaseFilter):
@@ -42,3 +43,9 @@ def test_zarr_tests_are_zarr(case: Case):
         if isinstance(root, zarr.Group):
             for _ in root.members(None):
                 pass
+
+
+@parametrize_cases(CaseFilter.from_args(kinds=["transform_coordinates"]))
+def test_transform_coordinates_oztest(case: Case):
+    with case.as_path() as p:
+        OztestTransformCoordinates.from_dir(p)

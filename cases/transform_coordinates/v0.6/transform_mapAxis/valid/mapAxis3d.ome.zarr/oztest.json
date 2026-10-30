@@ -1,0 +1,29 @@
+{
+  "description": "A 3d mapAxis cyclic permutation (not its own inverse).",
+  "transform_coordinates": {
+    "source": {
+      "coordinates": [
+        [
+          1,
+          2,
+          3
+        ]
+      ],
+      "name": "input"
+    },
+    "target": {
+      "coordinates": [
+        [
+          3,
+          1,
+          2
+        ]
+      ],
+      "name": "output"
+    },
+    "tolerance": {
+      "absolute": 1e-6,
+      "relative": 0.001
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "description": "Simple mapAxis. (inverse)",
+  "transform_coordinates": {
+    "source": {
+      "coordinates": [
+        [
+          2,
+          1
+        ]
+      ],
+      "name": "output"
+    },
+    "target": {
+      "coordinates": [
+        [
+          1,
+          2
+        ]
+      ],
+      "name": "input"
+    },
+    "tolerance": {
+      "absolute": 1e-6,
+      "relative": 0.001
+    }
+  }
+}
