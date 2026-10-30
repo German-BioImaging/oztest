@@ -1,0 +1,27 @@
+{
+  "description": "Bijection forward.",
+  "transform_coordinates": {
+    "source": {
+      "coordinates": [
+        [
+          1,
+          2
+        ]
+      ],
+      "name": "output"
+    },
+    "target": {
+      "coordinates": [
+        [
+          11,
+          12
+        ]
+      ],
+      "name": "input"
+    },
+    "tolerance": {
+      "absolute": 1e-6,
+      "relative": 0.001
+    }
+  }
+}

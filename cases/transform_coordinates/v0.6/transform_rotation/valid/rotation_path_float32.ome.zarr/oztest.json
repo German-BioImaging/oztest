@@ -1,0 +1,51 @@
+{
+  "description": "Rotation transformation.",
+  "transform_coordinates": {
+    "source": {
+      "coordinates": [
+        [
+          -1,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          2
+        ]
+      ],
+      "name": "input"
+    },
+    "target": {
+      "coordinates": [
+        [
+          0.0,
+          -1.41421356
+        ],
+        [
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.41421356
+        ],
+        [
+          0.0,
+          2.82842712
+        ]
+      ],
+      "name": "output"
+    },
+    "tolerance": {
+      "absolute": 1e-6,
+      "relative": 0.001
+    }
+  }
+}
