@@ -1,0 +1,67 @@
+{
+  "attributes": {
+    "ome": {
+      "coordinateSystems": [
+        {
+          "axes": [
+            {
+              "name": "y",
+              "type": "space"
+            },
+            {
+              "name": "x",
+              "type": "space"
+            },
+            {
+              "name": "d",
+              "type": "displacement"
+            }
+          ],
+          "name": "inputToOutput"
+        }
+      ],
+      "coordinateTransformations": [
+        {
+          "output": {
+            "name": "inputToOutput"
+          },
+          "type": "identity"
+        }
+      ]
+    }
+  },
+  "chunk_grid": {
+    "configuration": {
+      "chunk_shape": [
+        4,
+        4,
+        2
+      ]
+    },
+    "name": "regular"
+  },
+  "chunk_key_encoding": {
+    "configuration": {
+      "separator": "/"
+    },
+    "name": "default"
+  },
+  "codecs": [
+    {
+      "configuration": {
+        "endian": "little"
+      },
+      "name": "bytes"
+    }
+  ],
+  "data_type": "float32",
+  "fill_value": 0.0,
+  "node_type": "array",
+  "shape": [
+    4,
+    4,
+    2
+  ],
+  "storage_transformers": [],
+  "zarr_format": 3
+}
