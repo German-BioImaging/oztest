@@ -6,8 +6,9 @@ from collections.abc import Callable, Generator, Iterable, Iterator
 from contextlib import contextmanager
 from functools import total_ordering
 from importlib.resources import as_file, files
+from operator import gt, lt
 from pathlib import Path
-from typing import Any
+from typing import Any, Protocol, Self
 
 from packaging.specifiers import SpecifierSet
 from packaging.version import Version
@@ -108,6 +109,25 @@ class OzVersion(Version):
         super().__init__(version)
 
 
+class Ord(Protocol):
+    def __lt__(self, other: Self) -> bool: ...
+    def __gt__(self, other: Self) -> bool: ...
+
+
+def cmp_by_fields(
+    early_true: Callable[[Any, Any], bool],
+    early_false: Callable[[Any, Any], bool],
+    final: bool,
+    fields: Iterable[tuple[Any, Any]],
+) -> bool:
+    for a, b in fields:
+        if early_true(a, b):
+            return True
+        if early_false(a, b):
+            return False
+    return final
+
+
 @total_ordering
 class Case:
     """Information about a test case.
@@ -139,15 +159,18 @@ class Case:
     def __le__(self, rhs: object) -> bool:
         if not isinstance(rhs, type(self)):
             return NotImplemented
-        if self.kind < rhs.kind:
-            return True
-        if self.version < rhs.version:
-            return True
-        if self.profile < rhs.profile:
-            return True
-        if self.validity < rhs.validity:
-            return True
-        return self.name < rhs.name
+        return cmp_by_fields(
+            lt,
+            gt,
+            True,
+            fields=[
+                (self.kind, rhs.kind),
+                (self.version, rhs.version),
+                (self.profile, rhs.profile),
+                (self.validity, rhs.validity),
+                (self.name, rhs.name),
+            ],
+        )
 
     @contextmanager
     def as_path(self) -> Generator[Path]:
