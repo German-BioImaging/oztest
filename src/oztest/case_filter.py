@@ -8,7 +8,7 @@ from functools import total_ordering
 from importlib.resources import as_file, files
 from operator import gt, lt
 from pathlib import Path
-from typing import Any, Protocol, Self
+from typing import Any
 
 from packaging.specifiers import SpecifierSet
 from packaging.version import Version
@@ -107,11 +107,6 @@ class OzVersion(Version):
             raise ValueError("Version expected to start with 'v'")
         self.raw = version
         super().__init__(version)
-
-
-class Ord(Protocol):
-    def __lt__(self, other: Self) -> bool: ...
-    def __gt__(self, other: Self) -> bool: ...
 
 
 def cmp_by_fields(
