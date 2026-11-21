@@ -1,0 +1,73 @@
+{
+  "description": "1D coordinate field mapping index to physical space (x = i ** 2).",
+  "transform_coordinates": {
+    "source": {
+      "coordinates": [
+        [
+          0.0
+        ],
+        [
+          0.9
+        ],
+        [
+          1.0
+        ],
+        [
+          1.5
+        ],
+        [
+          2.0
+        ],
+        [
+          2.5
+        ],
+        [
+          3.0
+        ],
+        [
+          3.3
+        ],
+        [
+          4.0
+        ]
+      ],
+      "name": "input"
+    },
+    "target": {
+      "coordinates": [
+        [
+          0.0
+        ],
+        [
+          0.9
+        ],
+        [
+          1.0
+        ],
+        [
+          2.5
+        ],
+        [
+          4.0
+        ],
+        [
+          6.5
+        ],
+        [
+          9.0
+        ],
+        [
+          11.1
+        ],
+        [
+          16.0
+        ]
+      ],
+      "name": "output"
+    },
+    "tolerance": {
+      "absolute": 1e-6,
+      "relative": 0.001
+    }
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "attributes": {
+    "ome": {
+      "scene": {
+        "coordinateSystems": [
+          {
+            "axes": [
+              {
+                "name": "z",
+                "type": "space"
+              },
+              {
+                "name": "y",
+                "type": "space"
+              },
+              {
+                "name": "x",
+                "type": "space"
+              }
+            ],
+            "name": "input"
+          },
+          {
+            "axes": [
+              {
+                "name": "z",
+                "type": "space"
+              },
+              {
+                "name": "y",
+                "type": "space"
+              },
+              {
+                "name": "x",
+                "type": "space"
+              }
+            ],
+            "name": "output"
+          }
+        ],
+        "coordinateTransformations": [
+          {
+            "input": {
+              "name": "input"
+            },
+            "name": "inputToOutput",
+            "output": {
+              "name": "output"
+            },
+            "path": "coordinateTransformations/inputToOutput",
+            "type": "affine"
+          }
+        ]
+      },
+      "version": "0.6"
+    }
+  },
+  "node_type": "group",
+  "zarr_format": 3
+}

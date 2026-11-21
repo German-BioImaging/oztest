@@ -1,0 +1,51 @@
+{
+  "description": "Constant 2D displacement field shifting all points by (1, 2).",
+  "transform_coordinates": {
+    "source": {
+      "coordinates": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          1.0,
+          1.0
+        ],
+        [
+          2.0,
+          3.0
+        ],
+        [
+          3.0,
+          0.0
+        ]
+      ],
+      "name": "input"
+    },
+    "target": {
+      "coordinates": [
+        [
+          1.0,
+          2.0
+        ],
+        [
+          2.0,
+          3.0
+        ],
+        [
+          3.0,
+          5.0
+        ],
+        [
+          4.0,
+          2.0
+        ]
+      ],
+      "name": "output"
+    },
+    "tolerance": {
+      "absolute": 1e-6,
+      "relative": 0.001
+    }
+  }
+}

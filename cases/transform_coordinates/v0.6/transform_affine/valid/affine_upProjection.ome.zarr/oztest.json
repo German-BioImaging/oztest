@@ -1,0 +1,28 @@
+{
+  "description": "An affine performing up-projection from 2D to 3D.",
+  "transform_coordinates": {
+    "source": {
+      "coordinates": [
+        [
+          1,
+          2
+        ]
+      ],
+      "name": "input"
+    },
+    "target": {
+      "coordinates": [
+        [
+          2,
+          6,
+          3
+        ]
+      ],
+      "name": "output"
+    },
+    "tolerance": {
+      "absolute": 1e-6,
+      "relative": 0.001
+    }
+  }
+}

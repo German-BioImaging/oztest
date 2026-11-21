@@ -1,0 +1,27 @@
+{
+  "description": "Simple mapAxis.",
+  "transform_coordinates": {
+    "source": {
+      "coordinates": [
+        [
+          1,
+          2
+        ]
+      ],
+      "name": "input"
+    },
+    "target": {
+      "coordinates": [
+        [
+          2,
+          1
+        ]
+      ],
+      "name": "output"
+    },
+    "tolerance": {
+      "absolute": 1e-6,
+      "relative": 0.001
+    }
+  }
+}
